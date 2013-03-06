@@ -1,4 +1,4 @@
-thesis
+Masther Thesis
 ======
 
-Master Thesises
+This repo contains files related to my master thesis
