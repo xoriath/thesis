@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "WebcameraImageSource.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -16,7 +18,9 @@ public:
     ~MainWindow();
 private:
     Ui::MainWindow *ui;
-
+    AbstractLinearMovieSource *mov;
+private slots:
+    void display(cv::Mat image);
 };
 
 #endif // MAINWINDOW_H
