@@ -4,6 +4,7 @@
 #include "AbstractLinearMovieSource.h"
 
 #include <QWidget>
+#include <QTimer>
 
 #include <opencv2/opencv.hpp>
 
@@ -11,16 +12,22 @@ class WebcameraImageSource : public AbstractLinearMovieSource
 {
     Q_OBJECT
 public:
-    explicit WebcameraImageSource(int source, QWidget *parent = 0);
-    explicit WebcameraImageSource(QString source, QWidget *parent = 0);
+    explicit WebcameraImageSource(int source, int fps, QWidget *parent = 0);
+    explicit WebcameraImageSource(QString source, int fps, QWidget *parent = 0);
+
+    ~WebcameraImageSource();
     virtual bool resume();
     virtual bool stop();
     
+    void setupTimer(int fps);
 private:
     QWidget *parent;
-    bool isIntialized;
-    cv::VideoCapture *capture;
+    QTimer  *timer;
 
+    cv::VideoCapture *mCapture;
+    cv::Mat imageBuffer;
+
+    bool isIntialized;
 public slots:
     virtual bool capture();
 
