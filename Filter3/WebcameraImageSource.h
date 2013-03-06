@@ -5,6 +5,8 @@
 
 #include <QWidget>
 
+#include <opencv2/opencv.hpp>
+
 class WebcameraImageSource : public AbstractLinearMovieSource
 {
     Q_OBJECT
@@ -16,6 +18,8 @@ public:
     
 private:
     QWidget *parent;
+    bool isIntialized;
+    cv::VideoCapture *capture;
 
 public slots:
     virtual bool capture();
