@@ -2,10 +2,11 @@
 
 #include <opencv2/opencv.hpp>
 
-CannyImageProcessor::CannyImageProcessor(int threshold)
+CannyImageProcessor::CannyImageProcessor(int threshold, QWidget parent)
 {
     initialized = true;
     this->threshold = threshold;
+    this->parent = parent;
 }
 
 bool CannyImageProcessor::process(cv::Mat image)

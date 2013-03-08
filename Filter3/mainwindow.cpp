@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     mov = new WebcameraImageSource(0, 30, this);
-    processor = new CannyImageProcessor(20);
+    processor = new CannyImageProcessor(20, this);
     connect(mov, SIGNAL(captured(cv::Mat)), processor, SLOT(process(cv::Mat)));
     connect(processor, SIGNAL(processed(cv::Mat)), this, SLOT(display(cv::Mat)));
 }
