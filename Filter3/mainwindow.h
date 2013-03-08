@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "WebcameraImageSource.h"
+#include "CannyImageProcessor.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,7 @@ public:
 private:
     Ui::MainWindow *ui;
     AbstractLinearMovieSource *mov;
+    AbstractImageProcessor *processor;
 private slots:
     void display(cv::Mat image);
 };

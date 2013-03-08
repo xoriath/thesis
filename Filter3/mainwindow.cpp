@@ -7,17 +7,29 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     mov = new WebcameraImageSource(0, 30, this);
-    connect(mov, SIGNAL(captured(cv::Mat)), this, SLOT(display(cv::Mat)));
+    processor = new CannyImageProcessor(20);
+    connect(mov, SIGNAL(captured(cv::Mat)), processor, SLOT(process(cv::Mat)));
+    connect(processor, SIGNAL(processed(cv::Mat)), this, SLOT(display(cv::Mat)));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete mov;
 }
 
 void MainWindow::display(cv::Mat image)
 {
-    QImage img = QImage( (uchar*)image.data, image.cols, image.rows, image.step, QImage::Format_RGB888);
+    QImage img;
+    if (image.channels() == 3)
+    {
+        cv::cvtColor(image, image, CV_BGR2RGB);
+        img = QImage( (uchar*)image.data, image.cols, image.rows, image.step, QImage::Format_RGB888);
+    }
+    else if (image.channels() == 1)
+    {
+        img = QImage( (uchar*)image.data, image.cols, image.rows, image.step, QImage::Format_Indexed8);
+    }
     ui->image->setPixmap(QPixmap::fromImage(img));
 }
 

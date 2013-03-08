@@ -15,14 +15,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     FileImageSource.cpp \
-    WebcameraImageSource.cpp
+    WebcameraImageSource.cpp \
+    CannyImageProcessor.cpp
 
 HEADERS  += mainwindow.h \
     AbstractImageSource.h \
     FileImageSource.h \
     WebcameraImageSource.h \
     AbstractPauseable.h \
-    AbstractLinearMovieSource.h
+    AbstractLinearMovieSource.h \
+    AbstractImageProcessor.h \
+    CannyImageProcessor.h
 
 FORMS    += mainwindow.ui
 
