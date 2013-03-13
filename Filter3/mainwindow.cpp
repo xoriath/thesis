@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Filter3");
+
     mov = new WebcameraImageSource(0, 30, this);
     //mov = new FileImageSource(this);
     //processor = new CannyImageProcessor(20, (QWidget*)this);

@@ -43,7 +43,7 @@ bool FileImageSource::readImage()
 {
     if (!isInitialized)
         return false;
-    image = cv::imread(filename.toAscii().constData());
+    image = cv::imread(filename.toStdString());
     if (image.empty())
         return false;
     return true;
