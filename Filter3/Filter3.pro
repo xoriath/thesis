@@ -16,7 +16,8 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     FileImageSource.cpp \
     WebcameraImageSource.cpp \
-    CannyImageProcessor.cpp
+    CannyImageProcessor.cpp \
+    HoughCircles.cpp
 
 HEADERS  += mainwindow.h \
     AbstractImageSource.h \
@@ -25,7 +26,8 @@ HEADERS  += mainwindow.h \
     AbstractPauseable.h \
     AbstractLinearMovieSource.h \
     AbstractImageProcessor.h \
-    CannyImageProcessor.h
+    CannyImageProcessor.h \
+    HoughCircles.h
 
 FORMS    += mainwindow.ui
 

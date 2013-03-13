@@ -4,7 +4,9 @@
 #include <QMainWindow>
 
 #include "WebcameraImageSource.h"
+#include "FileImageSource.h"
 #include "CannyImageProcessor.h"
+#include "HoughCircles.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,10 +21,12 @@ public:
     ~MainWindow();
 private:
     Ui::MainWindow *ui;
-    AbstractLinearMovieSource *mov;
+    AbstractImageSource *mov;
     AbstractImageProcessor *processor;
+
 private slots:
     void display(cv::Mat image);
+    void displayIncoming(cv::Mat image);
 };
 
 #endif // MAINWINDOW_H

@@ -11,7 +11,7 @@ class CannyImageProcessor : public AbstractImageProcessor
 {
     Q_OBJECT
 public:
-    CannyImageProcessor(int threshold, QWidget parent = 0);
+    CannyImageProcessor(int threshold, QWidget *parent = 0);
 
     virtual bool isInitialized() { return initialized; }
 public slots:
@@ -21,7 +21,7 @@ signals:
 private:
     bool initialized;
     int threshold;
-    QWidget parent;
+    QWidget *parent;
 
 };
 

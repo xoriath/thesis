@@ -17,10 +17,10 @@
    <widget class="QLabel" name="image">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>991</width>
-      <height>581</height>
+      <x>30</x>
+      <y>50</y>
+      <width>601</width>
+      <height>441</height>
      </rect>
     </property>
     <property name="text">
@@ -54,6 +54,19 @@
     </property>
     <property name="movable">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="outImage">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>50</y>
+      <width>601</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

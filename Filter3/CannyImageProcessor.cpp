@@ -2,7 +2,7 @@
 
 #include <opencv2/opencv.hpp>
 
-CannyImageProcessor::CannyImageProcessor(int threshold, QWidget parent)
+CannyImageProcessor::CannyImageProcessor(int threshold, QWidget *parent)
 {
     initialized = true;
     this->threshold = threshold;
