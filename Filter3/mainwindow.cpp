@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //mov = new WebcameraImageSource(0, 30, this);
     mov = new FileImageSource(this);
-    //processor = new CannyImageProcessor(20, (QWidget*)this);
+    //processor = new CannyImageProcessor(20, this);
     processor = new HoughCircles();
     connect(mov, SIGNAL(captured(cv::Mat)), processor, SLOT(process(cv::Mat)));
     connect(mov, SIGNAL(captured(cv::Mat)), this, SLOT(displayIncoming(cv::Mat)));
