@@ -8,13 +8,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Filter3");
 
-    mov = new WebcameraImageSource(0, 30, this);
-    //mov = new FileImageSource(this);
+    //mov = new WebcameraImageSource(0, 30, this);
+    mov = new FileImageSource(this);
     //processor = new CannyImageProcessor(20, (QWidget*)this);
     processor = new HoughCircles();
     connect(mov, SIGNAL(captured(cv::Mat)), processor, SLOT(process(cv::Mat)));
     connect(mov, SIGNAL(captured(cv::Mat)), this, SLOT(displayIncoming(cv::Mat)));
     connect(processor, SIGNAL(processed(cv::Mat)), this, SLOT(display(cv::Mat)));
+    mov->capture();
 }
 
 MainWindow::~MainWindow()
