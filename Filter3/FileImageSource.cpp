@@ -9,7 +9,6 @@ FileImageSource::FileImageSource(QWidget *parent) : parent(parent)
     isInitialized = false;
     filename = QString();
     dir = QString();
-    capture();
 }
 
 FileImageSource::~FileImageSource()
