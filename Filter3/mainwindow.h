@@ -7,6 +7,7 @@
 #include "FileImageSource.h"
 #include "CannyImageProcessor.h"
 #include "HoughCircles.h"
+#include "GuassianBlur.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +24,7 @@ private:
     Ui::MainWindow *ui;
     AbstractImageSource *mov;
     AbstractImageProcessor *processor;
+    AbstractImageProcessor *preprocessor;
 
 private slots:
     void display(cv::Mat image);

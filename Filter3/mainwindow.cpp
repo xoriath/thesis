@@ -12,7 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //mov = new FileImageSource(this);
     //processor = new CannyImageProcessor(20, this);
     processor = new HoughCircles(this, ui->choiceWidget);
-    connect(mov, SIGNAL(captured(cv::Mat)), processor, SLOT(process(cv::Mat)));
+    preprocessor = new GuassianBlur(this, ui->choiceWidget);
+
+    connect(mov, SIGNAL(captured(cv::Mat)), preprocessor, SLOT(process(cv::Mat)));
+    connect(preprocessor, SIGNAL(processed(cv::Mat)), processor, SLOT(process(cv::Mat)));
     connect(mov, SIGNAL(captured(cv::Mat)), this, SLOT(displayIncoming(cv::Mat)));
     connect(processor, SIGNAL(processed(cv::Mat)), this, SLOT(display(cv::Mat)));
     //mov->capture();
