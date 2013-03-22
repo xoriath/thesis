@@ -33,16 +33,16 @@ bool HoughCircles::process(cv::Mat image)
                      settingsWidget->maxRadius
                      );
 
-    cv::rectangle(result, roi,cv::Scalar(255,0,0));
+    //cv::rectangle(result, roi,cv::Scalar(255,0,0));
     for (size_t i = 0; i < circles.size(); ++i)
     {
         cv::Point center(round(circles[i][0]), round(circles[i][1]));
-        if (!roi.contains(center))
-            continue;
+        //if (!roi.contains(center))
+        //    continue;
         centers.push_back(center);
         int radius = round(circles[i][2]);
         cv::circle(result, center, 3, cv::Scalar(0,255,0),-1,8,0);
-        //cv::circle(result, center,radius, cv::Scalar(0,0,255),3,8,0);
+        cv::circle(result, center,radius, cv::Scalar(0,0,255),3,8,0);
 
     }
 

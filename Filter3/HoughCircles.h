@@ -40,7 +40,7 @@ class HoughSettings : public QWidget
 
 public:
     explicit HoughSettings(QWidget *parent = 0)
-        : QWidget(parent){
+        : QWidget(parent) {
         Param1 = 200;
         Param2 = 100;
         minRadius = 0;
