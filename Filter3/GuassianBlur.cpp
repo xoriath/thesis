@@ -18,7 +18,7 @@ bool GuassianBlur::process(cv::Mat image)
 }
 
 
-QValidator::State OddSpinBox::validate(QString &input, int &pos) const
+QValidator::State OddSpinBox::validate(QString &input, int& /*pos*/) const
 {
     bool isOK = false;
     int val = input.toInt(&isOK);
