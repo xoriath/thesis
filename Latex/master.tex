@@ -1,0 +1,132 @@
+% !TeX spellcheck = nb_NO
+\documentclass[titlepage, 11pt, b5paper, norsk, footerfig,kybimage, twoside]{ntnurapport}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{parskip}
+
+\usepackage[round]{natbib} 
+\usepackage[nottoc,numbib]{tocbibind}
+
+\usepackage{varioref}
+\usepackage{siunitx}
+\usepackage{calc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{subfig}
+\usepackage{wrapfig}
+%\usepackage{algorithm2e}
+\usepackage{caption}
+\usepackage{ae}
+\usepackage{booktabs}
+
+\usepackage{siunitx}
+\usepackage[european, siunitx]{circuitikz}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage[intoc]{nomencl}
+\renewcommand{\nomname}{Forkortelser og terminologi}
+\renewcommand{\nomlabel}[1]{{\bf #1}\hfil}
+\makenomenclature
+
+
+
+%\usepackage[style=authortitle,natbib=true,backend=bibtex]{biblatex}
+%\addbibresource{bibliography}
+\usepackage{babel}
+
+\definecolor{dark-red}{rgb}{0.4,0.15,0.15}
+\definecolor{dark-blue}{rgb}{0.15,0.15,0.4}
+\definecolor{medium-blue}{rgb}{0,0,0.5}
+
+%\hypersetup{
+%    colorlinks, linkcolor={black},
+%    citecolor={black}, urlcolor={black},pdfstartview={FitH},pdftitle={Prosjektoppgave}, pdfauthor={Morten Engelhardt Olsen},pdfsubject={Prosjektoppgave}, pdfcreator={PDFLateX}
+%}
+
+\hypersetup{
+    colorlinks, linkcolor={dark-red},
+    citecolor={dark-blue}, urlcolor={medium-blue},pdfstartview={FitH},pdftitle={Prosjektoppgave}, pdfauthor={Morten Engelhardt Olsen},pdfsubject={Prosjektoppgave}, pdfcreator={PDFLateX}
+}
+
+\course{TTK4550 -- Fordypningsprosjekt}
+\author{Morten Engelhardt Olsen}
+\supervisor{Øyvind Stavdahl}
+%\subsupervisor{Geir Mathiesen \and Espen Helle}
+\overtitle{}
+\title{Bruk av trykksensor til måling av trykk over en flate/krummet flate for fremtidig måling av trykk i protesehylster}
+%\titlepagefigure{fp.jpg}
+\date{\today}
+%\group{}
+
+\bibliographystyle{plainnat}
+\begin{document}
+\pagenumbering{roman}
+\pagestyle{empty}
+\maketitle
+\cleardoublepage
+
+\input{oppgavebeskrivelse}
+\clearpage
+
+\input{forord}
+\clearpage
+\input{sammendrag}
+\cleardoublepage
+
+\pagestyle{empty}
+
+\tableofcontents
+\cleardoublepage
+\setcounter{page}{1}
+\pagenumbering{roman}
+\pagestyle{headings}
+
+\listoffigures
+\listoftables
+\input{nomencl}
+\cleardoublepage
+
+\pagestyle{headings}
+\pagenumbering{arabic}
+
+\input{innledning}
+\cleardoublepage
+
+\input{litteratur}
+\cleardoublepage
+
+\input{teori}
+\cleardoublepage
+
+\input{design}
+\cleardoublepage
+
+\input{impl}
+\cleardoublepage
+
+\input{test}
+\cleardoublepage
+
+\input{resultat}
+\cleardoublepage
+
+\input{diskusjon}
+\cleardoublepage
+
+\input{konklusjon}
+\cleardoublepage
+
+\input{videre}
+
+\cleardoublepage
+\bibliography{bibliography}
+
+\cleardoublepage
+\appendix
+\input{appendices}
+\end{document}
