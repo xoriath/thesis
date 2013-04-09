@@ -29,11 +29,7 @@
 \usepackage{multirow}
 \usepackage{listings}
 \usepackage[intoc]{nomencl}
-\renewcommand{\nomname}{Forkortelser og terminologi}
-\renewcommand{\nomlabel}[1]{{\bf #1}\hfil}
 \makenomenclature
-
-
 
 %\usepackage[style=authortitle,natbib=true,backend=bibtex]{biblatex}
 %\addbibresource{bibliography}
@@ -43,22 +39,17 @@
 \definecolor{dark-blue}{rgb}{0.15,0.15,0.4}
 \definecolor{medium-blue}{rgb}{0,0,0.5}
 
-%\hypersetup{
-%    colorlinks, linkcolor={black},
-%    citecolor={black}, urlcolor={black},pdfstartview={FitH},pdftitle={Prosjektoppgave}, pdfauthor={Morten Engelhardt Olsen},pdfsubject={Prosjektoppgave}, pdfcreator={PDFLateX}
-%}
-
 \hypersetup{
     colorlinks, linkcolor={dark-red},
-    citecolor={dark-blue}, urlcolor={medium-blue},pdfstartview={FitH},pdftitle={Prosjektoppgave}, pdfauthor={Morten Engelhardt Olsen},pdfsubject={Prosjektoppgave}, pdfcreator={PDFLateX}
+    citecolor={dark-blue}, urlcolor={medium-blue},pdfstartview={FitH},pdftitle={Master thesis}, pdfauthor={Morten Engelhardt Olsen},pdfsubject={Master thesis}, pdfcreator={PDFLateX}
 }
 
-\course{TTK4550 -- Fordypningsprosjekt}
+\course{TTK4900 -- Master thesis}
 \author{Morten Engelhardt Olsen}
-\supervisor{Øyvind Stavdahl}
-%\subsupervisor{Geir Mathiesen \and Espen Helle}
+\supervisor{Jo Arve Alfredsen}
+
 \overtitle{}
-\title{Bruk av trykksensor til måling av trykk over en flate/krummet flate for fremtidig måling av trykk i protesehylster}
+\title{}
 %\titlepagefigure{fp.jpg}
 \date{\today}
 %\group{}
@@ -70,18 +61,18 @@
 \maketitle
 \cleardoublepage
 
-\input{oppgavebeskrivelse}
-\clearpage
-
-\input{forord}
-\clearpage
-\input{sammendrag}
+\input{abstract}
 \cleardoublepage
+
+\input{preface}
+\cleardoublepage
+
 
 \pagestyle{empty}
 
 \tableofcontents
 \cleardoublepage
+
 \setcounter{page}{1}
 \pagenumbering{roman}
 \pagestyle{headings}
@@ -94,34 +85,9 @@
 \pagestyle{headings}
 \pagenumbering{arabic}
 
-\input{innledning}
+\input{introduction}
 \cleardoublepage
 
-\input{litteratur}
-\cleardoublepage
-
-\input{teori}
-\cleardoublepage
-
-\input{design}
-\cleardoublepage
-
-\input{impl}
-\cleardoublepage
-
-\input{test}
-\cleardoublepage
-
-\input{resultat}
-\cleardoublepage
-
-\input{diskusjon}
-\cleardoublepage
-
-\input{konklusjon}
-\cleardoublepage
-
-\input{videre}
 
 \cleardoublepage
 \bibliography{bibliography}
