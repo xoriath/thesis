@@ -1,16 +1,29 @@
 #include "WebcameraImageSource.h"
 
-WebcameraImageSource::WebcameraImageSource(int source, int fps, QWidget *parent) : parent(parent)
+WebcameraImageSource::WebcameraImageSource(int source, int fps, QWidget *parent, QTabWidget *settings) : parent(parent)
 {
     mCapture = new cv::VideoCapture(source);
     isIntialized = mCapture->isOpened();
+    settingsWidget = settings;
+    dev = QString(source);
+    this->settings = new WebcameraImageSourceSettings();
+    this->settingsWidget->addTab(this->settings, QString("Movie"));
     setupTimer(fps);
 }
 
-WebcameraImageSource::WebcameraImageSource(QString source, int fps, QWidget *parent) : parent(parent)
+WebcameraImageSource::WebcameraImageSource(QString source, int fps, QWidget *parent, QTabWidget *settings) : parent(parent)
 {
     mCapture = new cv::VideoCapture(source.toStdString());
     isIntialized = mCapture->isOpened();
+    dev = source;
+    if (fps == 0)
+    {
+        double _fps = mCapture->get(CV_CAP_PROP_FPS);
+        fps = (int) round(_fps);
+    }
+    settingsWidget = settings;
+    this->settings = new WebcameraImageSourceSettings();
+    this->settingsWidget->addTab(this->settings, QString("Movie"));
     setupTimer(fps);
 }
 
@@ -56,6 +69,7 @@ bool WebcameraImageSource::capture()
 
     if (imageBuffer.empty())
         return false;
+    updateInfo();
     emit captured(imageBuffer);
     return true;
 

@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Filter3");
 
-    mov = new WebcameraImageSource(0, 30, this);
+    mov = new WebcameraImageSource(QString("/home/moro/Dropbox/Delte filer/video1_good_footage.mp4"), 0, this, ui->choiceWidget);
     //mov = new FileImageSource(this);
     //processor = new CannyImageProcessor(20, this);
     processor = new HoughCircles(this, ui->choiceWidget);

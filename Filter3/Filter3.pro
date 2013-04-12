@@ -41,9 +41,9 @@ unix {
 }
 
 win32 {
-INCLUDEPATH += C:\\OpenCV2.4\\opencv\\build\\include
+INCLUDEPATH += C:\\opencv2\\opencv\\include
 
-LIBS += -LC:\\OpenCV2.4\\myBuild\\lib\\Debug \
+LIBS += -LC:\\opencv2_bin\\lib \
     -lopencv_calib3d240d \
     -lopencv_contrib240d \
     -lopencv_core240d \
