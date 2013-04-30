@@ -9,6 +9,10 @@ FileImageSource::FileImageSource(QWidget *parent) : parent(parent)
     isInitialized = false;
     filename = QString();
     dir = QString();
+    timer = new QTimer();
+    timer->setInterval(500);
+    connect(timer, SIGNAL(timeout()), this, SLOT(sendCaptured()));
+    timer->start();
 }
 
 FileImageSource::~FileImageSource()
@@ -42,7 +46,8 @@ bool FileImageSource::readImage()
 {
     if (!isInitialized)
         return false;
-    image = cv::imread(filename.toStdString());
+    std::string file = filename.toStdString();
+    image = cv::imread(file);
     if (image.empty())
         return false;
     return true;

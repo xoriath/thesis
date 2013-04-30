@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     WebcameraImageSource.cpp \
     CannyImageProcessor.cpp \
     HoughCircles.cpp \
-    GuassianBlur.cpp
+    GuassianBlur.cpp \
+    ../libVISCA/visca/libvisca_win32.c \
+    ../libVISCA/visca/libvisca.c
 
 HEADERS  += mainwindow.h \
     AbstractImageSource.h \
@@ -31,7 +33,8 @@ HEADERS  += mainwindow.h \
     AbstractImageProcessor.h \
     CannyImageProcessor.h \
     HoughCircles.h \
-    GuassianBlur.h
+    GuassianBlur.h \
+    ../libVISCA/visca/libvisca.h
 
 FORMS    += mainwindow.ui
 
@@ -41,9 +44,10 @@ unix {
 }
 
 win32 {
-INCLUDEPATH += C:\\opencv2\\opencv\\include
+INCLUDEPATH += C:\\opencv2_bin\\install\\include
+INCLUDEPATH += C:\\Users\\moro\Dropbox\\Projects\\thesis\\libVISCA\\visca
 
-LIBS += -LC:\\opencv2_bin\\lib \
+LIBS += -LC:\\opencv2_bin\\install\\lib \
     -lopencv_calib3d240d \
     -lopencv_contrib240d \
     -lopencv_core240d \

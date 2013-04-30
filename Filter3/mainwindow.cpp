@@ -8,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Filter3");
 
-    mov = new WebcameraImageSource(QString("/home/moro/Dropbox/Delte filer/video1_good_footage.mp4"), 0, this, ui->choiceWidget);
-    //mov = new FileImageSource(this);
+    //mov = new WebcameraImageSource(0, 30, this, ui->choiceWidget);
+    mov = new FileImageSource(this);
     //processor = new CannyImageProcessor(20, this);
     processor = new HoughCircles(this, ui->choiceWidget);
     preprocessor = new GuassianBlur(this, ui->choiceWidget);
@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(preprocessor, SIGNAL(processed(cv::Mat)), processor, SLOT(process(cv::Mat)));
     connect(mov, SIGNAL(captured(cv::Mat)), this, SLOT(displayIncoming(cv::Mat)));
     connect(processor, SIGNAL(processed(cv::Mat)), this, SLOT(display(cv::Mat)));
-    //mov->capture();
+
+    mov->capture();
 }
 
 MainWindow::~MainWindow()

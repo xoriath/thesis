@@ -17,7 +17,7 @@ public:
 public slots:
     virtual bool process(cv::Mat image);
 signals:
-    void processed(cv::Mat image);
+    //void processed(cv::Mat image);
 private:
     bool initialized;
     int threshold;

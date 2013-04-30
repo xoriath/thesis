@@ -6,6 +6,11 @@ WebcameraImageSource::WebcameraImageSource(int source, int fps, QWidget *parent,
     isIntialized = mCapture->isOpened();
     settingsWidget = settings;
     dev = QString(source);
+    if (fps == 0)
+    {
+        double _fps = mCapture->get(CV_CAP_PROP_FPS);
+        fps = (int) round(_fps);
+    }
     this->settings = new WebcameraImageSourceSettings();
     this->settingsWidget->addTab(this->settings, QString("Movie"));
     setupTimer(fps);

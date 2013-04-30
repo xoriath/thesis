@@ -5,6 +5,7 @@
 
 #include <QString>
 #include <QWidget>
+#include <QTimer>
 
 #include <opencv2/opencv.hpp>
 
@@ -18,9 +19,10 @@ public:
     
 public slots:
     virtual bool capture();
+    void sendCaptured() { emit captured(image); }
 
 signals:
-    void captured(cv::Mat image);
+    //void captured(cv::Mat image);
     
 private:
     bool isInitialized;
@@ -30,6 +32,7 @@ private:
     QWidget *parent;
 
     cv::Mat image;
+    QTimer *timer;
 
     void Initialize();
     bool readImage();
