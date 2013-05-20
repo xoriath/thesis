@@ -20,9 +20,9 @@ SOURCES += main.cpp\
     WebcameraImageSource.cpp \
     CannyImageProcessor.cpp \
     HoughCircles.cpp \
-    GuassianBlur.cpp \
-    ../libVISCA/visca/libvisca_win32.c \
-    ../libVISCA/visca/libvisca.c
+    GuassianBlur.cpp #\
+#   ../libVISCA/visca/libvisca_win32.c \
+#   ../libVISCA/visca/libvisca.c
 
 HEADERS  += mainwindow.h \
     AbstractImageSource.h \
@@ -33,8 +33,8 @@ HEADERS  += mainwindow.h \
     AbstractImageProcessor.h \
     CannyImageProcessor.h \
     HoughCircles.h \
-    GuassianBlur.h \
-    ../libVISCA/visca/libvisca.h
+    GuassianBlur.h #\
+#    ../libVISCA/visca/libvisca.h
 
 FORMS    += mainwindow.ui
 
@@ -43,10 +43,15 @@ unix {
     PKGCONFIG += opencv
 }
 
+QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 win32 {
-INCLUDEPATH += C:\\opencv2_bin\\install\\include
-INCLUDEPATH += C:\\Users\\moro\Dropbox\\Projects\\thesis\\libVISCA\\visca
 
+INCLUDEPATH += C:\\opencv2_bin\\install\\include
+INCLUDEPATH += C:\\opencv\\opencv\\include
+INCLUDEPATH += C:\\opencv\\opencv\\build\\include
+#INCLUDEPATH += ..\\libVISCA\\visca
+
+LIBS += -LC:\\opencv\\opencv\\build\\x86\\mingw\\lib
 LIBS += -LC:\\opencv2_bin\\install\\lib \
     -lopencv_calib3d240d \
     -lopencv_contrib240d \

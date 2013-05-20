@@ -8,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Filter3");
 
-    //mov = new WebcameraImageSource(0, 30, this, ui->choiceWidget);
-    mov = new FileImageSource(this);
+    mov = new WebcameraImageSource(-1, 30, this, ui->choiceWidget);
+    //mov = new FileImageSource(this);
     //processor = new CannyImageProcessor(20, this);
     processor = new HoughCircles(this, ui->choiceWidget);
     preprocessor = new GuassianBlur(this, ui->choiceWidget);
