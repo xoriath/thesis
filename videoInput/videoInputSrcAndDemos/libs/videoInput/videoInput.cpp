@@ -14,8 +14,8 @@
 
 //Include Directshow stuff here so we don't worry about needing all the h files.
 #include "DShow.h"
-#include "streams.h"
-#include "qedit.h"
+//#include "streams.h"
+//#include "qedit.h"
 #include "vector"
 #include "Aviriff.h"
 #include  "Windows.h"
