@@ -2,6 +2,11 @@
 
 \usepackage{parskip}
 \usepackage{ae}
+\usepackage{booktabs}
+\usepackage{varioref}
+\usepackage{natbib}
+\usepackage{siunitx}
+\usepackage{hyperref}
 
 
 \title{Camera-assisted ROV navigation in sea cages} % The title of your assignement; NB use \newlinetitle to start a newline
@@ -15,7 +20,7 @@
 % \usepackage[bf]{caption}
 % \usepackage{subcaption}
 
-\DeclareGraphicsExtensions{.pdf,.jpg}
+\DeclareGraphicsExtensions{.pdf,.jpg,.png}
 \graphicspath{{./figs/}}
 
 %\loadglsentries{glossary}
@@ -89,6 +94,9 @@
 \include{spec}
 \cleardoublepage{}
 
+\include{vision}
+\cleardoublepage
+
 \include{design}
 \cleardoublepage{}
 
@@ -105,7 +113,7 @@
 \cleardoublepage{}
 
 \renewcommand*{\bibname}{References}
-\bibliographystyle{alpha}
+\bibliographystyle{plainnat}
 \bibliography{bibliography}
 
 %% Uncomment the following if you have any appendix
