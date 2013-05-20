@@ -1,14 +1,140 @@
 
-\chapter{Specification}
-
+\chapter{Specifications}
+The hardware and software used in this project was chosen to be as close as possible to the 
+hardware used by Argus in their underwater vehicles. This gives us 
+a scenario closer to the real hardware, and imposes the same 
+restrictions on us as would be imposed in real world applications.
 
 \section{Hardware}
 
 \subsection{Argus hardware}
+The hardware used by Argus is only mentioned as 
+\begin{quote}
+$1\times$ Foc/Zoom camera \\
+Optional HDTV Camera 1080i \\
+$1\times$ Lowlight Black \& White camera \\
+\end{quote}
+in \citet{argusROV}. After some mailing with Argus, they provided us 
+with the specific details of this HD Camera, which is what we are interested in. 
+The most interesting parts of the camera specification is shown in table \vref{tbl:fcbh11}.
 
 \subsection{High definition video hardware}
+The camera used by Argus is the Sony FCB-H11 \citet{fcbh11}. 
+\begin{center}
+	\begin{table}[htbp]
+		\begin{tabular}{ll}
+		
+			\toprule
+				Camera specification & Detail \\
+			\midrule
+				Image sensor 			& 1/3-type CMOS \\
+				Pixels 					& $\approx2\times10^{6}$ Pixels \\
+				Zoom 					& $12\times$ (Digital) and $10\times$ (Optical) \\
+				Gain 					& Auto and manual (\SI{-3}{\deci\bel} to \SI{18}{\deci\bel}) \\
+				S/N						& > 50dB \\
+				Minimum illumination 	& \SI{1.2}{\lux} (F1.8 50IRE) \\
+										& \SI{1.0}{\lux} (ICR ON F1.8 50IRE) \\
+				Video output			& HD Analog component Y/Pb/Pr \\
+										& HD Digital LVDS Y/Pb/Pr 8 bit \\
+										& SD VBS \SI{1.0}{\volt_{p-p}} Negative sync Y/C \\
+				Camera control interface& VISCA TTL,\\
+				Operating temperature	& \SI{0}{\celsius} to \SI{45}{\celsius} \\
+				Power consumption		& \SI{9}{\volt} $\pm$ \SI{3}{\volt} DC, \SI{4.8}{\watt} \\
+			\bottomrule
+		\end{tabular}
+		\caption{Selected FCB-H11 Specifications}
+		\label{tbl:fcbh11}
+	\end{table}
+\end{center}
+
+As seen in \vref{tbl:fcbh11}, the camera outputs HD Digital LVDS\footnote{Low-Voltage Differential Signal} signals.
+Due to the open standard used by this camera, there are quite a few different add-on cards that 
+converts this LVDS signal to other, more robust signals for different applications.
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\linewidth]{fcbh11}
+	\caption{Sony FCB-H11 High Definition Block Camera}
+	\label{fig:fcb-h11}
+\end{figure}
 
 \subsection{High definition video signalling}
+
+
+
+Many different interface boards are available for the FCB-H11 which gives different output formats from the camera and 
+provides different control interfaces to the camera..
+The most normal inteface cards provides HDMI, USB, GigEthernet, SDI and HD-SDI outputs in 
+different configurations and combinations. A comparison of the different technologies is shown in \vref{tbl:transmission_systems}.
+
+\begin{center}
+	\begin{table}[htbp]
+		\begin{tabular}{llllr}
+		
+			\toprule
+				System & Bitrate & Distance & Protocol & Compression from FCB-H11 \\
+			\midrule
+				HDMI 				& \SI{10.2}{\giga bit\per\second}	& $\approx$ \SI{15}{\metre}		& TMDS 		& 0\% \\
+				USB 3.0 			& \SI{5}{\giga bit\per\second}		& $\approx$ \SI{5}{\metre}		& Serial	& 0\% \\
+				Gigabit Ethernet	& \SI{1}{\giga bit\per\second}		& $\approx$ \SI{220}{\metre}	& Serial	& $\approx$ 30\% \\
+				SDI					& \SI{360}{\mega bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI 		& $\approx$ 75\% \\
+				HD-SDI				& \SI{1.485}{\giga bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI		& 0\% \\
+			\bottomrule
+		\end{tabular}
+		\caption{Different signalling systems}
+		\label{tbl:transmission_systems}
+	\end{table}
+\end{center}
+
+
+For this project, it was decided that we should 
+try to get a interface that did have more capacity than the camera produces. Looking 
+at the different options in \vref{tbl:transmission_systems}, and also thinking of the transmission length, HD-SDI
+was chosen as the desired technology for transferring the video stream from the camera.
+
+\subsubsection{HD-SDI}\label{sec:hdsdi}
+The HD-SDI signalling standard is a improvement to the older SDI standard. Where the SDI can only transfer images
+in maximum 576i format, the HD-SDI standard i capable of transferring 720p and 1080i video. Newer versions 
+of the HD-SDI standard is also capable of 1080p and 4K video streams. 
+
+HD-SDI is a professional video standard mainly used by TV stations and in other high end systems. It is 
+defined and maintained by the Society of Motion Picture \& Television Engineers, SMPTE. More information 
+on the SDI family can be found on the SMPTE website at \url{https://www.smpte.org/standards/}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\linewidth]{em15710}
+	\caption{Intertest EM15710 iShoot-FCB-HDSDI interface}
+	\label{fig:em15710}
+\end{figure}
+
+\subsubsection{Video stream grabbing}
+The capture of video streams from a HD-SDI interface usually needs specifically designed hardware that 
+connects to one of the internal buses in the computer to get high enough bandwidth. This is usually 
+done using a PCI Express card that can support multiple HD-SDI streams simultaneously. 
+
+This is 
+however not practical, as we are going to use different computers and laptops during our testing. 
+It would therefore be better to get a external capture interface that connects to the computers using a 
+external computer interface. Thankfully, with the development of USB 3.0 we are able 
+to support the bandwidth requirements for HD signal.
+
+The Ultrastudio SDI from Blackmagic Design was chosen as the stream grabber. This is a industry standard 
+supplier that recently developed this external capture unit. More information on this can be found at 
+\url{http://www.blackmagicdesign.com/products/ultrastudiousb3/}, and the unit is shown in \vref{fig:ultrastudio_sdi}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\linewidth]{ultrastudiosdi}
+	\caption{Blackmagic Ultrastudio SDI for USB 3.0}
+	\label{fig:ultrastudio_sdi}
+\end{figure}
+
+The Ultrastudio SDI unit gives HD-SDI in together with HD-SDI out, HDMI out and USB 3.0. The 
+extra HDMI out makes it easy to connect a external monitor while capturing to get better visual feedback.
+
+
 
 \section{Software}
 
