@@ -1,13 +1,13 @@
-\documentclass{MScthesisITEM}
+\documentclass[a4]{MScthesis}
 
-% this package is just to generate text for demo-purposes
-\usepackage{blindtext}
+\usepackage{parskip}
+\usepackage{ae}
 
 
-\title{Title} % The title of your assignement; NB use \newlinetitle to start a newline
-\author{Firstname Lastname} % Your firstname and lastname
-\professor{Firstname Lastname, Affiliation} % Affiliation = ITEM for instance
-\supervisor{Firstname Lastname, Affiliation}
+\title{Camera-assisted ROV navigation in sea cages} % The title of your assignement; NB use \newlinetitle to start a newline
+\author{Morten Engelhardt Olsen} % Your firstname and lastname
+\professor{Jo Arve Alfredsen, ITK} % Affiliation = ITEM for instance
+\supervisor{Jo Arve Alfredsen, ITK\\ & Per Rundtop, SINTEF Fiskeri og Havbruk}
 
 %% Uncomment the following in case you want subfigures; note that there will be a warning for the caption package
 % \let\subcaption\undefined
@@ -18,8 +18,8 @@
 \DeclareGraphicsExtensions{.pdf,.jpg}
 \graphicspath{{./figs/}}
 
-\loadglsentries{glossary}
-\makeglossaries
+%\loadglsentries{glossary}
+%\makeglossaries
 
 \begin{document}
 \selectlanguage{english}
@@ -36,7 +36,7 @@
 
 %% There must be an abstract in English, even though the main text is in Norwegian
 \selectlanguage{english}
-\include{abstract_english}
+\include{abstract}
 \cleardoublepage
 
 %% Only for the master's thesis; if the main text is in English and you can write Norwegian, there must be an abstract in Norwegian as well.A
@@ -46,7 +46,7 @@
 
 \selectlanguage{english}% Change to 'norsk' if you are writing in Norwegian
 
-\include{preface}
+%\include{preface}
 \cleardoublepage
 
 % similarly you may add a separate acknowledgments page
@@ -63,37 +63,60 @@
 \cleardoublepage
 
 %% include if relevant
-\listofalgorithms
-\addcontentsline{toc}{chapter}{List of Algorithms}
-\cleardoublepage
+%\listofalgorithms
+%\addcontentsline{toc}{chapter}{List of Algorithms}
+%\cleardoublepage
 
 %% include if relevant
-\printglossary[title=List of Symbols, style=long]
-\cleardoublepage
-\glsaddall[]
+%\printglossary[title=List of Symbols, style=long]
+%\cleardoublepage
+%\glsaddall[]
 
 %% include if relevant
-\printglossary[title=List of Acronyms,type=\acronymtype] % prints just the list of acronyms
-\cleardoublepage
+%\printglossary[title=List of Acronyms,type=\acronymtype] % prints just the list of acronyms
+%\cleardoublepage
 
 \pagenumbering{arabic}
 \pagestyle{ruled}
-\include{example_chapter}
-%% include here the other chapters
+
+
+\include{preface}
+\cleardoublepage{}
+
+\include{introduction}
+\cleardoublepage{}
+
+\include{spec}
+\cleardoublepage{}
+
+\include{design}
+\cleardoublepage{}
+
+\include{implementation}
+\cleardoublepage{}
+
+\include{discussion}
+\cleardoublepage{}
+
+\include{conclusion}
+\cleardoublepage{}
+
+\include{further}
+\cleardoublepage{}
 
 \renewcommand*{\bibname}{References}
 \bibliographystyle{alpha}
-\bibliography{main}
+\bibliography{bibliography}
 
 %% Uncomment the following if you have any appendix
-% \appendix
-% \addtocontents{toc}{%
-%  \protect\vspace{1em}% 
-%  \protect\noindent \bfseries \appendixtocname\protect\par
-%  \protect\vspace{-.5em}%
-% }
+ \appendix
+ \addtocontents{toc}{%
+  \protect\vspace{1em}% 
+  \protect\noindent \bfseries \appendixtocname\protect\par
+  \protect\vspace{-.5em}%
+ }
 % \renewcommand{\chaptername}{\appendixname}
 %% include below possible appendices (chapters)
-
+\include{appendices}
 
 \end{document} 
