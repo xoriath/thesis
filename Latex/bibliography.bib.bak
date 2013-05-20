@@ -1,7 +1,7 @@
 % This file was created with JabRef 2.9b2.
 % Encoding: Cp1252
 
-@ELECTRONIC{,
+@ELECTRONIC{argusROV,
   author = {Argus},
   year = {2013},
   title = {Argus Rover Observation/Light work Class ROV},
