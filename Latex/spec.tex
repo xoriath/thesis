@@ -20,37 +20,58 @@ The most interesting parts of the camera specification is shown in table \vref{t
 
 \subsection{High definition video hardware}
 The camera used by Argus is the Sony FCB-H11 \citet{fcbh11}. 
-\begin{center}
-	\begin{table}[htbp]
-		\begin{tabular}{ll}
-		
-			\toprule
-				Camera specification & Detail \\
-			\midrule
-				Image sensor 			& 1/3-type CMOS \\
-				Pixels 					& $\approx2\times10^{6}$ Pixels \\
-				Zoom 					& $12\times$ (Digital) and $10\times$ (Optical) \\
-				Gain 					& Auto and manual (\SI{-3}{\deci\bel} to \SI{18}{\deci\bel}) \\
-				S/N						& > 50dB \\
-				Minimum illumination 	& \SI{1.2}{\lux} (F1.8 50IRE) \\
-										& \SI{1.0}{\lux} (ICR ON F1.8 50IRE) \\
-				Video output			& HD Analog component Y/Pb/Pr \\
-										& HD Digital LVDS Y/Pb/Pr 8 bit \\
-										& SD VBS \SI{1.0}{\volt_{p-p}} Negative sync Y/C \\
-				Camera control interface& VISCA TTL,\\
-				Operating temperature	& \SI{0}{\celsius} to \SI{45}{\celsius} \\
-				Power consumption		& \SI{9}{\volt} $\pm$ \SI{3}{\volt} DC, \SI{4.8}{\watt} \\
-			\bottomrule
-		\end{tabular}
-		\caption{Selected FCB-H11 Specifications}
-		\label{tbl:fcbh11}
-	\end{table}
-\end{center}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ll}
+	
+		\toprule
+			Camera specification 	& Detail \\
+		\midrule
+			Image sensor 			& 1/3-type CMOS \\
+			Pixels 					& $\approx2\times10^{6}$ Pixels \\
+			Zoom 					& $12\times$ (Digital) and $10\times$ (Optical) \\
+			Gain 					& Auto and manual (\SI{-3}{\deci\bel} to \SI{18}{\deci\bel}) \\
+			S/N						& > 50dB \\
+			Minimum illumination 	& \SI{1.2}{\lux} (F1.8 50IRE) \\
+									& \SI{1.0}{\lux} (ICR ON F1.8 50IRE) \\
+			Video output			& HD Analog component Y/Pb/Pr \\
+									& HD Digital LVDS Y/Pb/Pr 8 bit \\
+									& SD VBS \SI{1.0}{\volt_{p-p}} Negative sync Y/C \\
+			Camera control interface& VISCA TTL \\
+			Operating temperature	& \SI{0}{\celsius} to \SI{45}{\celsius} \\
+			Power consumption		& \SI{9}{\volt} $\pm$ \SI{3}{\volt} DC, \SI{4.8}{\watt} \\
+		\bottomrule
+	\end{tabular}
+	\caption{Selected FCB-H11 Specifications}
+	\label{tbl:fcbh11}
+\end{table}
+
 
 As seen in \vref{tbl:fcbh11}, the camera outputs HD Digital LVDS\footnote{Low-Voltage Differential Signal} signals.
 Due to the open standard used by this camera, there are quite a few different add-on cards that 
 converts this LVDS signal to other, more robust signals for different applications.
 
+\subsubsection{VISCA camera controll}
+The FCB-H11 can be controlled by the open Sony VISCA protocol. This is based of RS-232C at TTL signal levels
+at 9600 bauds. Newer cameras can support RS-232C at up to 38400 bauds using the 8N1 configuration and no flow control. 
+VISCA contains a rich set of commands to controll professionall video systems. It even is compatible with 
+the broadcast networking specification of the RS-232C which means that a single signal line can contain 
+8 devices including the PC, as it uses \SI{1}{\byte} for adressing.
+
+The implementation of the VISCA protocol that is supported by the FCB-H11 is given in \citet{fcbh11tech}. 
+The FCB-H11 does for instance not implement the broadcasting function of VISCA, and must therefore 
+be on a single RS-232C signal line. 
+
+In addition to normal power on/off and setup data, the VISCA protocol can send a slew of different 
+control messages. Amogst these are zoom, focus, white balancing, spot focus and different video effects as 
+black and white or negative images that is being processed by the image processor on the camera. This 
+makes the camera very versatile, either by direct control from a PC using a TTL level translator or 
+by any microcontroller using USART.
+
+Sony provides a basic program for implementing VISCA. In addition to this, a open source C library for Windows, Linux and 
+AVR is available at \url{http://sourceforge.net/projects/libvisca/}. This makes it very easy to 
+integrate VISCA into the software if needed.
 
 \begin{figure}[htbp]
 	\centering
@@ -68,23 +89,22 @@ provides different control interfaces to the camera..
 The most normal inteface cards provides HDMI, USB, GigEthernet, SDI and HD-SDI outputs in 
 different configurations and combinations. A comparison of the different technologies is shown in \vref{tbl:transmission_systems}.
 
-\begin{center}
-	\begin{table}[htbp]
-		\begin{tabular}{llllr}
-			\toprule
-				System & Bitrate & Distance & Protocol & Compression from FCB-H11 \\
-			\midrule
-				HDMI 				& \SI{10.2}{\giga bit\per\second}	& $\approx$ \SI{15}{\metre}		& TMDS 		& 0\% \\
-				USB 3.0 			& \SI{5}{\giga bit\per\second}		& $\approx$ \SI{5}{\metre}		& Serial	& 0\% \\
-				Gigabit Ethernet	& \SI{1}{\giga bit\per\second}		& $\approx$ \SI{220}{\metre}	& Serial	& $\approx$ 30\% \\
-				SDI					& \SI{360}{\mega bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI 		& $\approx$ 75\% \\
-				HD-SDI				& \SI{1.485}{\giga bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI		& 0\% \\
-			\bottomrule
-		\end{tabular}
-		\caption{Different signalling systems}
-		\label{tbl:transmission_systems}
-	\end{table}
-\end{center}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{llllr}
+		\toprule
+			System 				& Bitrate 							& Distance 						& Protocol 	& Compression Ratio \\
+		\midrule
+			HDMI 				& \SI{10.2}{\giga bit\per\second}	& $\approx$ \SI{15}{\metre}		& TMDS 		& 0\% \\
+			USB 3.0 			& \SI{5}{\giga bit\per\second}		& $\approx$ \SI{5}{\metre}		& Serial	& 0\% \\
+			Gigabit Ethernet	& \SI{1}{\giga bit\per\second}		& $\approx$ \SI{220}{\metre}	& Serial	& $\approx$ 30\% \\
+			SDI					& \SI{360}{\mega bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI 		& $\approx$ 75\% \\
+			HD-SDI				& \SI{1.485}{\giga bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI		& 0\% \\
+		\bottomrule
+	\end{tabular}
+	\caption{Different signalling systems}
+	\label{tbl:transmission_systems}
+\end{table}
 
 
 For this project, it was decided that we should 
@@ -100,6 +120,10 @@ of the HD-SDI standard is also capable of 1080p and 4K video streams.
 HD-SDI is a professional video standard mainly used by TV stations and in other high end systems. It is 
 defined and maintained by the Society of Motion Picture \& Television Engineers, SMPTE. More information 
 on the SDI family can be found on the SMPTE website at \url{https://www.smpte.org/standards/}.
+
+Some of the niceties of the HD-SDI interface, in addition to the bandwith and transmission length, is 
+that the interface is self-clocked, self-correcting and supports self setup. This means that the 
+interface is more or less plug-and-play\footnote{Bad vibes ohoy}. 
 
 \begin{figure}[htbp]
 	\centering
@@ -136,6 +160,12 @@ extra HDMI out makes it easy to connect a external monitor while capturing to ge
 
 
 \section{Software}
+The software used is split into two different categories; the video capture software provided by Blackmagic 
+Design, and the video analyisis software developed in this project. Fortunately, the Ultrastudio 
+unit comes with WDM\footnote{Windows Device Management} drivers and DSHOW\footnote{Direct Show, part of DirectX} 
+filters, and a software development kit which makes it somewhat easy to connect to the unit and stream 
+the video from it in real time. 
+
 
 \subsection{High definition video capture}
 
