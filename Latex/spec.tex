@@ -75,7 +75,7 @@ integrate VISCA into the software if needed.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\linewidth]{fcbh11}
+	\includegraphics{fcbh11}
 	\caption{Sony FCB-H11 High Definition Block Camera}
 	\label{fig:fcb-h11}
 \end{figure}
@@ -132,6 +132,22 @@ interface is more or less plug-and-play\footnote{Bad vibes ohoy}.
 	\label{fig:em15710}
 \end{figure}
 
+\subsubsection{Gigabit Ethernet}
+During the last month of the project, two Gigabit Ethernet modules were aquired. The modules is primarily 
+going to be used in future projects, as cabeling and instrumentation over ethernet turns out to be simpler. 
+
+The interface is shown in figure \vref{fig:iport} with the FCB-H11 connected. This unit gives access to the VISCA protocol described 
+in \vref{sec:visca} over ethernet, together with the video feed. This means that the feed and control signals can be superimposed 
+on any ethernet compatible infrastructure, which is both cheaper and more readily available, as well as easier 
+to interface with most computers today.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\linewidth]{iport}
+	\caption{Pleora SB-Pro IP Engine for Sony GCB-H11}
+	\label{fig:iport}
+\end{figure}
+
 \subsubsection{Video stream grabbing}
 The capture of video streams from a HD-SDI interface usually needs specifically designed hardware that 
 connects to one of the internal buses in the computer to get high enough bandwidth. This is usually 
@@ -145,7 +161,7 @@ to support the bandwidth requirements for HD signal.
 
 The Ultrastudio SDI from Blackmagic Design was chosen as the stream grabber. This is a industry standard 
 supplier that recently developed this external capture unit. More information on this can be found at 
-\url{http://www.blackmagicdesign.com/products/ultrastudiousb3/}, and the unit is shown in \vref{fig:ultrastudio_sdi}.
+\url{http://www.blackmagicdesign.com/products/ultrastudiousb3/} and the unit is shown in \vref{fig:ultrastudio_sdi}.
 
 \begin{figure}[htbp]
 	\centering
