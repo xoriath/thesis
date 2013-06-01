@@ -84,17 +84,18 @@ is more likely to be linear, and this discrepancy gives distortions in the cross
 
 \subsection{Lukas-Kanade}
 The Lucas-Kanade method is a widely used method for providing the needed constraints to solve \eqref{equ:optical.flow}. This method assumes that 
-the motion between to frames is small and more or less constant in the neighborhood of a point. This means that \eqref{equ:optical.flow} holds for all points within some window
+the motion between to frames is small and more or less constant in the neighborhood of a point, known as the velocity smoothness constraint. 
+This means that \eqref{equ:optical.flow} holds for all points within some window
 with the point that is being considered. This means that the local velocity vector should satisfy \eqref{equ:lk.local.flow}.
 
 \begin{align}\label{equ:lk.local.flow}
-I_x(q_1)V_x &+ I_y(q_1)V_y	&= -I_t(q_1) \\
-I_x(q_2)V_x &+ I_y(q_2)V_y 	&= -I_t(q_2) \notag \\
-& \vdots \notag \\
-I_x(q_N)V_x &+ I_y(q_N)V_y 	&= -I_t(q_N) \notag
+I_x(q_1)V_x + I_y(q_1)V_y	&= -I_t(q_1) \\
+I_x(q_2)V_x + I_y(q_2)V_y 	&= -I_t(q_2) \notag \\
+&\,\,\, \vdots \notag \\
+I_x(q_N)V_x + I_y(q_N)V_y 	&= -I_t(q_N) \notag
 \end{align}
 
-Rewriting \eqref{equ:lk.local.flow} on matrix form using the normal $Av = b$ form, we get the matrices in \eqref{equ:lk.local.flow.mat}.
+Rewriting \eqref{equ:lk.local.flow} on matrix form using the normal $Av = b$ structure, we get the matrices in \eqref{equ:lk.local.flow.mat}.
 
 \begin{equation} \label{equ:lk.local.flow.mat}
 A = 
