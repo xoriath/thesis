@@ -39,7 +39,7 @@ def generate_hough(gray):
 	return vis
 	
 	
-cap = cv2.VideoCapture('/home/moro/Dropbox/Litteratursøk/video/referanse_fart.mp4')
+cap = cv2.VideoCapture('/home/moro/Dropbox/Litteratursøk/video/horisontal_rift_1.mp4')
 
 ret, im = cap.read()
 prev_gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
