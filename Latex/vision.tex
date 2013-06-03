@@ -1,9 +1,9 @@
 
 \chapter{Computer Vision and algorithms}
 
-Computer vision has seen a substancial growth over the last 40 years, as camera technology became mature 
+Computer vision has seen a substantial growth over the last 40 years, as camera technology became mature 
 and the analysis of data became cheaper and faster. In this chapter we are going to look at the main algorithms 
-that were tested and applied in the project, and give some more depth in the algorithms and mathematichs behind each of them.
+that were tested and applied in the project, and give some more depth in the algorithms and mathematics behind each of them.
 
 \section{Thresholding}
 
@@ -12,19 +12,19 @@ that were tested and applied in the project, and give some more depth in the alg
 \subsection{Adaptive thresholding}
 
 
-\section{Bluring}
+\section{Blurring}
 
 
 
 \section{Optical flow}
-Optical flow is a term that covers the apparent motion of objects, spcifically its edges and surfaces 
+Optical flow is a term that covers the apparent motion of objects, specifically its edges and surfaces 
 relative to an observer. The term was first coined for this by James Gibson in the 1940s 
 to describe the visual stimulus that animals get from movement\citet{gibson50}.
 
 
 \subsection{Theory}
 The base of optical flow theory is based on the normal flow constraint equation in \eqref{equ:image.constraint}. In equation \eqref{equ:image.constraint}, $I$ is the intensity
-at a given point at a given time. It is quite abvious that a normal optical flow problem will be of three dimension as it will include spatial coordinates in addition
+at a given point at a given time. It is quite obvious that a normal optical flow problem will be of three dimension as it will include spatial coordinates in addition
 to a temporal part. The deltas shown is an indefinite movement in the three dimensions.
 
 
@@ -41,7 +41,7 @@ I(x + \Delta x, y+ \Delta y, t + \Delta t) = I(x,y,t) + \frac{\partial I}{\parti
 \end{equation}
 
 Equation \eqref{equ:image.constraint.taylor} contains a higher order collection term $\mathcal{O}(\partial^2)$. This can be thought of the error in this first order taylor approximation. As
-the deltas are assumed small, then the taylor expansion terms with order higher than one is negligible. 
+the deltas are assumed small, then the Taylor expansion terms with order higher than one is negligible. 
 
 Substituting equation \eqref{equ:image.constraint} into \eqref{equ:image.constraint.taylor} it is obvious that equation \eqref{equ:taylor.exp} must hold. 
 By dividing equation \eqref{equ:taylor.exp} with the change of time we get \eqref{equ:taylor.exp.subs}, where $V_x$ and $V_y$ are the spatial velocities in the 
@@ -63,7 +63,7 @@ I_x V_x + I_y V_y &= -I_t \label{equ:intensity.deriv} \\
 
 Equation \eqref{equ:optical.flow} shows the big problem of optical flow problems. It is a single equation with two unknowns, and is therefore not 
 solvable without adding additional constraints to the analysis. The problem is known as the aperture problem, and all of the following algorithms 
-introduces some additional condition that inferes constraints to the flow problem.
+introduces some additional condition that infers constraints to the flow problem.
 
 \subsection{Phase correlation}
 As the name of this method implies, this method uses shift and correlation in the phase plane between to frames as a measure of motion. Given that correlation is a global operation,
@@ -78,13 +78,13 @@ By inverse transforming $R$, we get the normalized cross-correlation, $r = \math
 heat map of the movement between the two frames.
 
 There are however some drawbacks with using the phase correlation method, in addition to the global aspect. The global aspect 
-inferes smooth and equal movement of all points between the frames. Also, since the Fourier transform is involved. The method has its base 
+infers smooth and equal movement of all points between the frames. Also, since the Fourier transform is involved. The method has its base 
 in the Fourier shift theorem, which implies that the images are assumed to have a circular shift. The case is, however, that the shift 
 is more likely to be linear, and this discrepancy gives distortions in the cross-correlation.
 
 \subsection{Lukas-Kanade}
 The Lucas-Kanade method is a widely used method for providing the needed constraints to solve \eqref{equ:optical.flow}. This method assumes that 
-the motion between to frames is small and more or less constant in the neighborhood of a point, known as the velocity smoothness constraint. 
+the motion between to frames is small and more or less constant in the neighbourhood of a point, known as the velocity smoothness constraint. 
 This means that \eqref{equ:optical.flow} holds for all points within some window
 with the point that is being considered. This means that the local velocity vector should satisfy \eqref{equ:lk.local.flow}.
 
