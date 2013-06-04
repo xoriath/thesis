@@ -28,16 +28,15 @@ at a given point at a given time. It is quite obvious that a normal optical flow
 to a temporal part. The deltas shown is an indefinite movement in the three dimensions.
 
 
-\begin{equation}
-I(x,y,t) = I(x + \Delta x, y+ \Delta y, t + \Delta t)
-\label{equ:image.constraint}
+\begin{equation}\label{equ:image.constraint}
+	I(x,y,t) = I(x + \Delta x, y+ \Delta y, t + \Delta t)
 \end{equation}
 
 If the deltas in equation \eqref{equ:image.constraint} is assumed to be small, then the approximation in equation \eqref{equ:image.constraint.taylor} is valid.
 
-\begin{equation}
-I(x + \Delta x, y+ \Delta y, t + \Delta t) = I(x,y,t) + \frac{\partial I}{\partial x} \Delta x + \frac{\partial I}{\partial y} \Delta y + \frac{\partial I}{\partial t} \Delta t + \mathcal{O}(\partial^2)
-\label{equ:image.constraint.taylor}
+\begin{equation}\label{equ:image.constraint.taylor}
+	I(x + \Delta x, y+ \Delta y, t + \Delta t) = I(x,y,t) + \frac{\partial I}{\partial x} \Delta x + 
+		\frac{\partial I}{\partial y} \Delta y + \frac{\partial I}{\partial t} \Delta t + \mathcal{O}(\partial^2)
 \end{equation}
 
 Equation \eqref{equ:image.constraint.taylor} contains a higher order collection term $\mathcal{O}(\partial^2)$. This can be thought of the error in this first order taylor approximation. As
@@ -48,17 +47,19 @@ By dividing equation \eqref{equ:taylor.exp} with the change of time we get \eqre
 $x$ and $y$ direction.
 
 \begin{align}
-\frac{\partial I}{\partial x} \Delta x + \frac{\partial I}{\partial y} \Delta y + \frac{\partial I}{\partial t} \Delta t &= 0 \label{equ:taylor.exp} \\
-\frac{\partial I}{\partial x} \frac{\Delta x}{\Delta t} + \frac{\partial I}{\partial y} \frac{\Delta y}{\Delta t} + \frac{\partial I}{\partial t} \frac{\Delta t}{\Delta t} &= \frac{0}{\Delta t} \notag \\
-\frac{\partial I}{\partial x} V_x + \frac{\partial I}{\partial y} V_y + \frac{\partial I}{\partial t}  &= 0 \label{equ:taylor.exp.subs}
+	\frac{\partial I}{\partial x} \Delta x + \frac{\partial I}{\partial y} \Delta y + 
+		\frac{\partial I}{\partial t} \Delta t &= 0 \label{equ:taylor.exp} \\
+	\frac{\partial I}{\partial x} \frac{\Delta x}{\Delta t} + \frac{\partial I}{\partial y} \frac{\Delta y}{\Delta t} + 
+		\frac{\partial I}{\partial t} \frac{\Delta t}{\Delta t} &= \frac{0}{\Delta t} \notag \\
+	\frac{\partial I}{\partial x} V_x + \frac{\partial I}{\partial y} V_y + \frac{\partial I}{\partial t}  &= 0 \label{equ:taylor.exp.subs}
 \end{align}
 
 By defining the intensity spatial derivatives as $I_x$, $I_y$ and $I_t$, we get equation \eqref{equ:intensity.deriv}. Using the dot product on the derivatives 
 leads to equation \eqref{equ:optical.flow}, which is the usual way of writing the optical flow problem.
 
 \begin{align}
-I_x V_x + I_y V_y &= -I_t \label{equ:intensity.deriv} \\
-\nabla I^\top \cdot \vec{V} &= -I_t \label{equ:optical.flow}
+	I_x V_x + I_y V_y &= -I_t \label{equ:intensity.deriv} \\
+	\nabla I^\top \cdot \vec{V} &= -I_t \label{equ:optical.flow}
 \end{align}
 
 Equation \eqref{equ:optical.flow} shows the big problem of optical flow problems. It is a single equation with two unknowns, and is therefore not 
@@ -71,7 +72,7 @@ the method is also image global. The first step is to apply the Fourier transfor
 can then be calculated with equation \eqref{equ:phase.cross.power}.
 
 \begin{equation}\label{equ:phase.cross.power}
-R = \frac{\textbf{G}_a \circ \textbf{G}_b^\star}{|\textbf{G}_a \textbf{G}_b^\star|}
+	R = \frac{\textbf{G}_a \circ \textbf{G}_b^\star}{|\textbf{G}_a \textbf{G}_b^\star|}
 \end{equation}
 
 By inverse transforming $R$, we get the normalized cross-correlation, $r = \mathcal{F}^{-1}\{R\}$, which can be though of as a 
@@ -100,21 +101,18 @@ with the point that is being considered. This means that the local velocity vect
 Rewriting \eqref{equ:lk.local.flow} on matrix form using the normal $Av = b$ structure, we get the matrices in \eqref{equ:lk.local.flow.mat}.
 
 \begin{equation} \label{equ:lk.local.flow.mat}
-A = 
-\begin{bmatrix}
-	I_x(q_1) 	& I_y(q_1) \\
-	I_x(q_2) 	& I_y(q_2) \\ 
-	\vdots 		& \vdots \\
-	I_x(q_N)	& I_y(q_N)
-\end{bmatrix} \quad 
-v = 
-\begin{bmatrix}
-V_x \\ V_y
-\end{bmatrix} \quad
-b = 
-\begin{bmatrix}
--I_t(q_1) \\ -I_t(q_2) \\ \vdots \\ -I_t(q_N)
-\end{bmatrix}
+A = \begin{bmatrix}
+		I_x(q_1) 	& I_y(q_1) \\
+		I_x(q_2) 	& I_y(q_2) \\ 
+		\vdots 		& \vdots \\
+		I_x(q_N)	& I_y(q_N)
+	\end{bmatrix} \quad 
+v =	\begin{bmatrix}
+		V_x \\ V_y
+	\end{bmatrix} \quad
+b = \begin{bmatrix}
+		-I_t(q_1) \\ -I_t(q_2) \\ \vdots \\ -I_t(q_N)
+	\end{bmatrix}
 \end{equation}
 
 The equation set in \eqref{equ:lk.local.flow.mat} is overdetermined. The Lucas-Kanade method now uses the 
@@ -122,22 +120,22 @@ least squares method to find the minimal solution to this set. The system that t
 form of \eqref{equ:lk.local.flow.solv}.
 
 \begin{equation}\label{equ:lk.local.flow.solv}
-v = \left(A^\top A\right)^{-1} A^\top b
+	v = \left(A^\top A\right)^{-1} A^\top b
 \end{equation}
 
 If equation \eqref{equ:lk.local.flow.solv} is expanded back to its original matrices and using sums, we have the system in \eqref{equ:lk.local.flow.solv.full}
 
 \begin{equation}\label{equ:lk.local.flow.solv.full}
-\begin{bmatrix}
-V_x \\ V_y
-\end{bmatrix} = 
-\begin{bmatrix}
-\sum_ i{I_x^2(q_i)} 	 & \sum_i{I_x(q_i)I_y(q_i)} \\
-\sum_i{I_y(q_i)I_x(q_i)} & \sum{I_y^2(q_i)}
-\end{bmatrix}^{-1}
-\begin{bmatrix}
--\sum_i{I_x(q_i)I_t(q_i)} \\ -\sum_i{I_y(q_i)I_t(q_i)}
-\end{bmatrix}
+	\begin{bmatrix}
+		V_x \\ V_y
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		\sum_ i{I_x^2(q_i)} 	 & \sum_i{I_x(q_i)I_y(q_i)} \\
+		\sum_i{I_y(q_i)I_x(q_i)} & \sum{I_y^2(q_i)}
+	\end{bmatrix}^{-1}
+	\begin{bmatrix}
+		-\sum_i{I_x(q_i)I_t(q_i)} \\ -\sum_i{I_y(q_i)I_t(q_i)}
+	\end{bmatrix}
 \end{equation}
 
 \subsection{Horch-Schunck}\label{sec:horn-schunck}
@@ -146,7 +144,7 @@ It formulates the flow as a energy function on the form \eqref{equ:horn.schunck}
 $L=\int{E}$.
 
 \begin{equation}\label{equ:horn.schunck}
-E = \int \int \Big( \big(I_x u + I_y v + I_t\big)^2 + \alpha^2\big(||\nabla u||^2 + ||\nabla v||^2\big) \Big) \text{d}x\text{d}y
+	E = \int \int \Big( \big(I_x u + I_y v + I_t\big)^2 + \alpha^2\big(||\nabla u||^2 + ||\nabla v||^2\big) \Big) \text{d}x\text{d}y
 \end{equation}
 
 \begin{equation}\label{equ:horn.schunck.euler}
