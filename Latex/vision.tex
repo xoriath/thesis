@@ -138,13 +138,13 @@ If equation \eqref{equ:lk.local.flow.solv} is expanded back to its original matr
 	\end{bmatrix}
 \end{equation}
 
-\subsection{Horch-Schunck}\label{sec:horn-schunck}
-The Horch-Schunck method is another global algorithm\citet{horn80}. It assumes that the flow in a frame is smooth and will minimize any error in this assumption.
+\subsection{Horn-Schunck}\label{sec:horn-schunck}
+The Horn-Schunck method is another global algorithm\citet{horn80}. It assumes that the flow in a frame is smooth and will minimize any error in this assumption.
 It formulates the flow as a energy function on the form \eqref{equ:horn.schunck}, which can be minimized using the corresponding Euler-Lagrange equations in \eqref{equ:horn.schunck.euler} with
 $L=\int{E}$.
 
 \begin{equation}\label{equ:horn.schunck}
-	E = \int \int \Big( \big(I_x u + I_y v + I_t\big)^2 + \alpha^2\big(||\nabla u||^2 + ||\nabla v||^2\big) \Big) \text{d}x\text{d}y
+	E = \int \int \Big ( \big (I_x u + I_y v + I_t\big )^2 + \alpha^2\big (||\nabla u||^2 + ||\nabla v||^2\big ) \Big )\; \mathrm{d}x\,\mathrm{d}y
 \end{equation}
 
 \begin{equation}\label{equ:horn.schunck.euler}
