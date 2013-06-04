@@ -65,7 +65,7 @@ Equation \eqref{equ:optical.flow} shows the big problem of optical flow problems
 solvable without adding additional constraints to the analysis. The problem is known as the aperture problem, and all of the following algorithms 
 introduces some additional condition that infers constraints to the flow problem.
 
-\subsection{Phase correlation}
+\subsection{Phase correlation}\label{sec:phase.correlation}
 As the name of this method implies, this method uses shift and correlation in the phase plane between to frames as a measure of motion. Given that correlation is a global operation,
 the method is also image global. The first step is to apply the Fourier transform to both frames, $\textbf{G}_a = \mathcal{F}\{g_a\}$ and $\textbf{G}_b = \mathcal{F}\{g_b\}$. The cross-power spectrum 
 can then be calculated with equation \eqref{equ:phase.cross.power}.
@@ -82,18 +82,20 @@ infers smooth and equal movement of all points between the frames. Also, since t
 in the Fourier shift theorem, which implies that the images are assumed to have a circular shift. The case is, however, that the shift 
 is more likely to be linear, and this discrepancy gives distortions in the cross-correlation.
 
-\subsection{Lukas-Kanade}
+\subsection{Lukas-Kanade}\label{sec:lukas-kanade}
 The Lucas-Kanade method is a widely used method for providing the needed constraints to solve \eqref{equ:optical.flow}. This method assumes that 
 the motion between to frames is small and more or less constant in the neighbourhood of a point, known as the velocity smoothness constraint. 
 This means that \eqref{equ:optical.flow} holds for all points within some window
 with the point that is being considered. This means that the local velocity vector should satisfy \eqref{equ:lk.local.flow}.
 
-\begin{align}\label{equ:lk.local.flow}
-I_x(q_1)V_x + I_y(q_1)V_y	&= -I_t(q_1) \\
-I_x(q_2)V_x + I_y(q_2)V_y 	&= -I_t(q_2) \notag \\
-&\,\,\, \vdots \notag \\
-I_x(q_N)V_x + I_y(q_N)V_y 	&= -I_t(q_N) \notag
-\end{align}
+\begin{equation}\label{equ:lk.local.flow}
+	\begin{split}
+		I_x(q_1)V_x + I_y(q_1)V_y	&= -I_t(q_1) \\
+		I_x(q_2)V_x + I_y(q_2)V_y 	&= -I_t(q_2) \\
+		&\,\,\, \vdots \\
+		I_x(q_N)V_x + I_y(q_N)V_y 	&= -I_t(q_N)
+	\end{split}
+\end{equation}
 
 Rewriting \eqref{equ:lk.local.flow} on matrix form using the normal $Av = b$ structure, we get the matrices in \eqref{equ:lk.local.flow.mat}.
 
@@ -138,4 +140,28 @@ V_x \\ V_y
 \end{bmatrix}
 \end{equation}
 
-\subsection{Horch-Schunck}
+\subsection{Horch-Schunck}\label{sec:horn-schunck}
+The Horch-Schunck method is another global algorithm\citet{horn80}. It assumes that the flow in a frame is smooth and will minimize any error in this assumption.
+It formulates the flow as a energy function on the form \eqref{equ:horn.schunck}, which can be minimized using the corresponding Euler-Lagrange equations in \eqref{equ:horn.schunck.euler} with
+$L=\int{E}$.
+
+\begin{equation}\label{equ:horn.schunck}
+E = \int \int \Big( \big(I_x u + I_y v + I_t\big)^2 + \alpha^2\big(||\nabla u||^2 + ||\nabla v||^2\big) \Big) \text{d}x\text{d}y
+\end{equation}
+
+\begin{equation}\label{equ:horn.schunck.euler}
+	\begin{split}
+		\frac{\partial L}{\partial u} - \frac{\partial}{\partial x}\frac{\partial L}{\partial u_x} - \frac{\partial}{\partial y}\frac{\partial L}{\partial u_y} &= 0 \\
+		\frac{\partial L}{\partial v} - \frac{\partial}{\partial x}\frac{\partial L}{\partial v_x} - \frac{\partial}{\partial y}\frac{\partial L}{\partial v_y} &= 0
+	\end{split}
+\end{equation}
+
+The solution to the system in \eqref{equ:horn.schunck} and \eqref{equ:horn.schunck.euler} uses the same arguments as those given in \citet{khalil01} for energy based system analysis.
+The full analytical steps and solution can be found in \citet{horn80} which will be omitted here. The result usually takes the form as the iterative equations in \eqref{equ:horn.schunck.solution}.
+
+\begin{equation}\label{equ:horn.schunck.solution}
+	\begin{split}
+		u^{k + 1} &= \bar{u}^k - \frac{I_x\left(I_x\bar{u}^k + I_y\bar{u}^k + I_t\right)}{\alpha^2 + I_x^2 + I_y^2} \\
+		v^{k + 1} &= \bar{v}^k - \frac{I_x\left(I_x\bar{v}^k + I_y\bar{v}^k + I_t\right)}{\alpha^2 + I_x^2 + I_y^2}
+	\end{split}
+\end{equation}
