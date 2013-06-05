@@ -2,9 +2,9 @@
 # -*- coding: UTF-8 -*-
 import cv2
 import numpy
+import operator
 
 def draw_flow(im, flow, step=16):
-	print flow
 	h, w = im.shape[:2]
 	y, x = numpy.mgrid[step/2:h:step, step/2:w:step].reshape(2, -1)
 	fx, fy = flow[y,x].T
@@ -23,6 +23,7 @@ cap = cv2.VideoCapture('/home/moro/Dropbox/Litteratursøk/video/referanse_fart.m
 ret, im = cap.read()
 im = numpy.asarray(im[:,:])
 prev_gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
+move = numpy.array( [0.0, 0.0])
 
 while True:
 	ret, im = cap.read()
@@ -42,8 +43,20 @@ while True:
 		flags=cv2.OPTFLOW_FARNEBACK_GAUSSIAN)
 	prev_gray = gray
 
+	move_temp = numpy.array([0.0, 0.0])
+	for i in flow:
+		for j in i:
+			move_temp += j
+	
+	move_temp /= flow.shape[0] * flow.shape[1]
+	move += move_temp
+	print "Movement between frames:"
+	print move_temp
+	print "Total movement:"
+	print move
     # plot the flow vectors
 	cv2.imshow('Optical flow',draw_flow(gray,flow))
+	
 	if cv2.waitKey(1) == 27:
 		print "BREAK"
 		break
