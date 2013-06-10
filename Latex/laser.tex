@@ -33,7 +33,8 @@ circle as shown in \vref{fig:pattern_circle}.
 			\draw (0:\R)
 				\foreach \x in {72,144,...,360} {  -- (\x:\R) };
 		\end{tikzpicture}\label{fig:pattern_pentagon}
-	}\hfill
+	}
+	\\
 	\subfloat[Hexagon]{
 		\begin{tikzpicture}[scale=1]
 			\newdimen\R
@@ -51,7 +52,7 @@ circle as shown in \vref{fig:pattern_circle}.
 		\begin{tikzpicture}[scale=0.8]
 			\draw (0,0) circle(1);
 		\end{tikzpicture}\label{fig:pattern_circle}
-	}\hfill
+	}
 	\caption{Different laser patterns}
 	\label{fig:laser_pattern}
 \end{figure}
@@ -60,7 +61,7 @@ Criteria for a good pattern should contain
 \begin{enumerate}
 	\item Not ambiguous when interpolating lines
 	\item Easy algorithm to reconstruct shape
-	\item Keep orientation information\footnote{Avoid aperture problem, see section \vref{sec:aperture.problem}}
+	\item Try to give orientation information\footnote{Avoid aperture problem, see section \vref{sec:aperture.problem}}
 \end{enumerate}
 
 It can be shown that amongst the patterns in figure \vref{fig:laser_pattern} that all patterns with a even number 
@@ -68,3 +69,30 @@ of vertices is prone to the aperture problem. This means that pattern \ref{fig:p
 and \ref{fig:pattern_hexagon} can be eliminated right away. Looking at the pentagon and heptagon, they 
 have respectively $\frac{\SI{360}{\degree}}{5} = \SI{72}{\degree}$ and $\frac{\SI{360}{\degree}}{7} \approx \SI{51.4}{\degree}$ angle 
 for each corner, and the angles get closer as the number of vertices increases.
+
+The best choice seems to be either a triangle or a circle. The triangle is easy to reconstruct. Only two of the vertices 
+needs to be known to do a full reconstruction if the angles of the triangle is known. The orientation can 
+also be determined within a third of a full revolution without ambiguity. However, the triangle 
+gives ambiguity each $\pm$\SI{60}{\degree}, so the problem of ambiguous orientation can not be solved using a 
+regular pattern.
+
+Irregular patterns are also possible, and using a irregular pattern would remove all ambiguity of the operation. A irregular 
+pattern is however much more difficult to recreate out of partial lines. Due to this added complexity, a simple circle turns out 
+to be the best choice.
+
+A circle can not convey any orientation data, as there are no corners and vertices to link a angle to the net onto which it is projected.
+It can however give information on distance to the net by checking the amount of masks in the net that is inside the circle. The 
+deformation of the circle will also give information on the tilt of the ROV relative to the net. The shape that would be read back in 
+this case would be a ellipsis. The ration of the minor- and major axis in the ellipsis would give estimates on these angles. 
+
+Ellipsis are quite easy to detect using computer vision. The most used algorithm is described in \citet{fitzgibbon95}. This algorithm fits a ellipsis onto a set of points, usually >5 is needed. The algorithm optimizes the error of the found ellipsis for all 
+points. The error would then be a measure of the deformation caused by movement in the net.
+
+\begin{figure}[htbp]
+    \centering
+    \subfloat[Simulated points]{\label{fig:ellipsis_1}{\includegraphics[width=0.75\textwidth]{ellipsis_1}}}
+    \\
+    \subfloat[Detected ellipsis]{\label{fig:ellipsis_2}{\includegraphics[width=0.75\textwidth]{ellipsis_2}}}
+	\caption{Simulation of a projected ellipsis and the detected ellipsis}
+	\label{fig:ellipsis}
+\end{figure}
