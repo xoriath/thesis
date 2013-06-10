@@ -7,6 +7,33 @@ that were tested and applied in the project, and give some more depth in the alg
 
 \todo{Object tracking?}
 
+\section{Aperture Problem}\label{sec:aperture.problem}
+The aperture problem in computer vision usually arises during optical flow problems. The issue is that 
+any differential flow algorithm is only able to determine flow that is normal to the edge which is being traced.
+This means that other flow components that is not normal to a edge are not determined.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[scale=2]
+		\draw[thick, blue, fill=blue!10] (0,0) circle(1);
+		\draw (-1,-1) -- (1,1);
+		\draw[->] (-1,-1) -- (-0.5,-1);
+		\draw[->] (1,1) -- (1.5, 1);
+		\draw[->] (0,0) -- (0.5,-0.5);
+		\node at (1.2,1.2) {$\vec{v}$};
+		\node at (-0.8,-1.2) {$\vec{v}$};
+		\node at (0.3,-0.0) {$\vec{n}$};
+	\end{tikzpicture}
+	\caption{Aperture problem, figure inspired by \citet{Yazdanbakhsh20111093}. If we see through the circle, then the 
+		movement along $\vec{v}$ looks like movement along $\vec{n}$ since $\vec{n}$ is the only normal direction to the edge.}
+	\label{fig:aperture}
+\end{figure}
+
+Figure \vref{fig:aperture} tries to illustrate how the aperture problem arises. If the area that are being tracked 
+only contains a single edge, then it is impossible to say if there are movement in any direction that is not 
+parallel to the normal direction to the edge. This means that tracing a single edge is not favourable, and all 
+modern algorithms will try to trace on corners, as a corner by definition is made of at least two non-parallel edges 
+
 \section{Optical flow}
 Optical flow is a term that covers the apparent motion of objects, specifically its edges and surfaces 
 relative to an observer. The term was first coined for this by James Gibson in the 1940s 
@@ -155,4 +182,3 @@ The full analytical steps and solution can be found in \citet{horn80} which will
 	\end{split}
 \end{equation}
 
-\todo{Write about Farneback}
