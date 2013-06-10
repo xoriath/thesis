@@ -24,7 +24,7 @@ circle as shown in \vref{fig:pattern_circle}.
 	\subfloat[Square]{
 		\begin{tikzpicture}[scale=0.1]
 			\draw (0,0) -- (0,15) -- (15,15) -- (15,0) -- (0,0);
-		\end{tikzpicture}
+		\end{tikzpicture}\label{fig:pattern_square}
 	}\hfill
 	\subfloat[Pentagon]{
 		\begin{tikzpicture}[scale=1]
@@ -32,7 +32,7 @@ circle as shown in \vref{fig:pattern_circle}.
 			\R=0.8cm
 			\draw (0:\R)
 				\foreach \x in {72,144,...,360} {  -- (\x:\R) };
-		\end{tikzpicture}
+		\end{tikzpicture}\label{fig:pattern_pentagon}
 	}\hfill
 	\subfloat[Hexagon]{
 		\begin{tikzpicture}[scale=1]
@@ -40,7 +40,7 @@ circle as shown in \vref{fig:pattern_circle}.
 			\R=0.8cm
 			\draw (0:\R)
 				\foreach \x in {60,120,...,360} {  -- (\x:\R) };
-		\end{tikzpicture}
+		\end{tikzpicture}\label{fig:pattern_hexagon}
 	}\hfill
 	\subfloat[Heptagon]{
 		\begin{tikzpicture}[scale=0.8]
@@ -60,8 +60,11 @@ Criteria for a good pattern should contain
 \begin{enumerate}
 	\item Not ambiguous when interpolating lines
 	\item Easy algorithm to reconstruct shape
-	\item Keep orientation information\footnote{Avoid apperture problem, see section \vref{sec:apperture.problem}}
+	\item Keep orientation information\footnote{Avoid aperture problem, see section \vref{sec:aperture.problem}}
 \end{enumerate}
 
 It can be shown that amongst the patterns in figure \vref{fig:laser_pattern} that all patterns with a even number 
-of vertices is prone to the apperture problem. 
+of vertices is prone to the aperture problem. This means that pattern \ref{fig:pattern_square} 
+and \ref{fig:pattern_hexagon} can be eliminated right away. Looking at the pentagon and heptagon, they 
+have respectively $\frac{\SI{360}{\degree}}{5} = \SI{72}{\degree}$ and $\frac{\SI{360}{\degree}}{7} \approx \SI{51.4}{\degree}$ angle 
+for each corner, and the angles get closer as the number of vertices increases.
