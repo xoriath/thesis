@@ -1,6 +1,6 @@
 
 
-\chapter{Laser-based orientation}
+\chapter{Laser-based Orientation}
 In this...
 
 \section{Projections}
@@ -55,3 +55,13 @@ circle as shown in \vref{fig:pattern_circle}.
 	\caption{Different laser patterns}
 	\label{fig:laser_pattern}
 \end{figure}
+
+Criteria for a good pattern should contain
+\begin{enumerate}
+	\item Not ambiguous when interpolating lines
+	\item Easy algorithm to reconstruct shape
+	\item Keep orientation information\footnote{Avoid apperture problem, see section \vref{sec:apperture.problem}}
+\end{enumerate}
+
+It can be shown that amongst the patterns in figure \vref{fig:laser_pattern} that all patterns with a even number 
+of vertices is prone to the apperture problem. 
