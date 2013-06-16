@@ -43,7 +43,6 @@ unix {
     PKGCONFIG += opencv
 }
 
-QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 win32 {
 
 INCLUDEPATH += C:\\opencv2_bin\\install\\include
