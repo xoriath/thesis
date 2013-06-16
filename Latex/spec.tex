@@ -54,8 +54,8 @@ converts this LVDS signal to other, more robust signals for different applicatio
 
 \subsubsection{VISCA camera control}\label{sec:visca}
 The FCB-H11 can be controlled by the open Sony VISCA protocol. This is based of RS-232C at TTL signal levels
-at 9600 bauds. Newer cameras can support RS-232C at up to 38400 bauds using the 8N1 configuration and no flow control. 
-VISCA contains a rich set of commands to control professional video systems. It even is compatible with 
+at 9600 bauds. Newer cameras can support RS-232C at up to 38400 bauds using a 8N1 configuration and no flow control. 
+VISCA contains a rich set of commands to control professional video systems. It is even compatible with 
 the broadcast networking specification of the RS-232C which means that a single signal line can contain 
 8 devices including the PC, as it uses \SI{1}{\byte} for addressing.
 
@@ -91,14 +91,19 @@ different configurations and combinations. A comparison of the different technol
 	\centering
 	\begin{tabular}{llllr}
 		\toprule
-			System 				& Bitrate 							& Distance 						& Protocol 	& Compression Ratio \\
+			System 				& Bitrate 							& Distance 						& Protocol 		& Compression Ratio \\
+								& 									& 								& 				& (for 720p Video) \\
 		\midrule
-			HDMI 				& \SI{10.2}{\giga bit\per\second}	& $\approx$ \SI{15}{\metre}		& TMDS 		& 0\% \\
-			USB 3.0 			& \SI{5}{\giga bit\per\second}		& $\approx$ \SI{5}{\metre}		& Serial	& 0\% \\
-			Gigabit Ethernet	& \SI{1}{\giga bit\per\second}		& $\approx$ \SI{220}{\metre}	& Serial	& $\approx$ 30\% \\
-			SDI					& \SI{360}{\mega bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI 		& $\approx$ 75\% \\
-			HD-SDI				& \SI{1.485}{\giga bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI		& 0\% \\
-		\bottomrule
+			HDMI 				& \SI{10.2}{\giga bit\per\second}	& $\approx$ \SI{15}{\metre}		& TMDS 			& 0\% \\
+			USB 3.0 			& \SI{5}{\giga bit\per\second}		& $\approx$ \SI{5}{\metre}		& Serial		& 0\% \\
+			Gigabit Ethernet	& \SI{1}{\giga bit\per\second}		& $\approx$ \SI{220}{\metre}	& Serial		& $\approx$ 30\% \\
+			SDI					& \SI{360}{\mega bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI 			& $\approx$ 75\% \\
+			HD-SDI				& \SI{1.485}{\giga bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI			& 0\% \\
+			HD-SDI (optical)	& \SI{1.485}{\giga bit\per\second}	& $\approx$ \SI{45}{\kilo\metre}& NRZI (optical)& 0\% \\
+			Dual Link HD-SDI	& \SI{2.970}{\giga bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI			& 0\% \\
+			3G-SDI				& \SI{2.970}{\giga bit\per\second}	& $\approx$ \SI{300}{\metre}	& NRZI			& 0\% \\
+			6G-SDI				& Undecided\tablefootnote{Still in draft}& $\approx$ \SI{300}{\metre}& NRZI			& 0\% \\
+		\bottomrule	
 	\end{tabular}
 	\caption{Different signalling systems}
 	\label{tbl:transmission_systems}
@@ -120,8 +125,8 @@ defined and maintained by the Society of Motion Picture \& Television Engineers,
 on the SDI family can be found on the SMPTE website at \url{https://www.smpte.org/standards/}.
 
 Some of the niceties of the HD-SDI interface, in addition to the bandwidth and transmission length, is 
-that the interface is self-clocked, self-correcting and supports self setup. This means that the 
-interface is more or less plug-and-play\footnote{Bad vibes ohoy}. 
+that the interface is self-clocked, self-correcting and supports self-setup and initialization. This means that the 
+interface is more or less plug-and-play. 
 
 \begin{figure}[htbp]
 	\centering
@@ -130,7 +135,45 @@ interface is more or less plug-and-play\footnote{Bad vibes ohoy}.
 	\label{fig:em15710}
 \end{figure}
 
-\subsubsection{Gigabit Ethernet}
+This interface is coincidentally the same interface used by Argus according to the information that were received from them.
+However, due to the long distance of transmission when a ROV is submerged, Argus does a on-board conversion of the 
+coaxial HD-SDI signal to a optical carrier. The use of a optical medium to transfer HD-SDI is a normal 
+technique when the high definition signals are transferred over a distance that would lead to signal degradation using 
+electrical signalling.
+
+The HD-SDI interface has also been extended into Dual Link HD-SDI, 3G-SDI and 6G-SDI. The Dual Link 
+is a simple extension allowing two HD-SDI streams on one cable. The 3G version specifies a new signalling standard 
+without changing the bitrate relative to the Dual Link. However, the 3G version is has full 
+capability of 1080p streams at \SI{60}{\hertz}. Finally, the 6G version is a new and upcoming version made 
+specifically for the new 4K, also known as Ultra HD, video format. The differences between the different resolutions can be 
+seen in \autoref{fig:resolutions}.
+
+\begin{figure}[htbp]
+	\begin{tikzpicture}[scale=0.34]
+		\filldraw[fill=blue!40!white] (0,0) rectangle (38.4,21.6);
+		\filldraw[fill=blue!20!white] (0,0) rectangle (19.2,10.8);
+		\filldraw[fill=green!20!white] (0,0) rectangle (12.8,7.2);
+		\filldraw[fill=red!20!white] (0,0) rectangle (7.2,4.80);
+		
+		\node() at (3.6,3.6){720};
+		\node() at (6,2.4){480};
+		
+		\node() at (6.8,6){1280};
+		\node() at (11,3.6){720};
+		
+		\node() at (9.7,9.6){1920};
+		\node() at (17,5.4){1080};
+		
+		\node() at (19.2,20.4){3840};
+		\node() at (36.7,10.8){2160};
+	\end{tikzpicture}
+	\caption{Scales of different resolutions. Red: DVD, Green: 720p, Light Blue: 1080p, Blue: UHD (4K)}
+	\label{fig:resolutions}
+\end{figure}
+
+
+
+\subsubsection{Gigabit Ethernet}\label{sec:hw.gige}
 During the last month of the project, two Gigabit Ethernet modules were acquired. The modules is primarily 
 going to be used in future projects, as cabling and instrumentation over ethernet turns out to be simpler. 
 
@@ -153,7 +196,7 @@ done using a PCI Express card that can support multiple HD-SDI streams simultane
 
 This is however not practical, as we are going to use different computers and laptops during our testing. 
 It would therefore be better to get a external capture interface that connects to the computers using a 
-external computer interface. Thankfully, with the development of USB 3.0 we are able 
+external computer interface. Thankfully, with the developmen of USB 3.0 we are able 
 to support the bandwidth requirements for HD signal.
 
 The Ultrastudio SDI from Blackmagic Design was chosen as the stream grabber. This is a industry standard 
@@ -170,19 +213,41 @@ supplier that recently developed this external capture unit. More information on
 The Ultrastudio SDI unit gives HD-SDI in together with HD-SDI out, HDMI out and USB 3.0. The 
 extra HDMI out makes it easy to connect a external monitor while capturing to get better visual feedback.
 
-
+The ethernet module described in \autoref{sec:hw.gige}.uses multicast technology to transfer the video stream over IP. The 
+card comes with a open SDK to discover and stream from any unit on the local network. As a added bonus, the 
+ethernet module allows the VISCA control commands from \autoref{sec:visca} to be transferred over the same 
+ethernet connection, removing the need for extra signalling cabling.
 
 \section{Software}
 The software used is split into two different categories; the video capture software provided by Blackmagic 
-Design, and the video analysis software developed in this project. Fortunately, the Ultrastudio 
+Design or any other compatible platforms, and the video analysis software developed in this project. Fortunately, the Ultrastudio 
 unit comes with WDM\footnote{Windows Device Management} drivers and DSHOW\footnote{Direct Show, part of DirectX} 
 filters, and a software development kit which makes it somewhat easy to connect to the unit and stream 
 the video from it in real time. 
 
-
 \subsection{High definition video capture}
+In theory, all WDM compatible software can be used to access the video stream from the Ultrastudio unit. It turns out
+however that the provided software from Blackmagic has some extra interfaces which makes it a bit easier to use, for instance 
+to change resolution on demand, jitter removal and different behavioural aspects.
+
+Blackmagic provides the Media Express platform for capture. This is a basic but useful starting point. The main 
+drawback is the small amount of capture formats available in the software, and the frequent crashes that were experienced 
+during use. However, the program were stable during capture, and it is capable to capture to YUV 8 bit which means almost 
+as raw data as possible. This format is also easy to re-encode to other formats at a later stage for storage. 
+
+It turned out that the image processing stack used in the project also were capable to connect directly to the Ultrastudio unit. 
+This meant that the video stream could be fed straight into the different algorithms. This were useful for 
+testing on-line performance, as opposed to storing the stream and doing off-line analysis.
 
 \subsection{High definition video analysis}
+The de facto standard in computer vision is the OpenCV library. Based on C++, it contains bindings multiple other languages. Especially 
+the Python binding makes quick prototyping easy. Matlab was also considered, as Matlab does contain quite a powerful 
+computer vision toolbox\footnote{Equivalent to library}.
 
-\subsection{Real time constraints}
+During early prototyping, several discrepancies between the OpenCV algorithms 
+ and the equivalent Matlab 
+algorithms were discovered. Multiple standard algorithms would behave differently with the same source and same parameters. This 
+were the cause of the shift from using Matlab as prototype platform to using Python as Python uses the same library source 
+as the one used in C++.
 
+\subsection{Real time considerations}
