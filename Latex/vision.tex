@@ -1,16 +1,51 @@
 
-\chapter{Computer Vision and algorithms}
+\chapter{Computer Vision and Algorithms}
 
 Computer vision has seen a substantial growth over the last 40 years, as camera technology became mature 
 and the analysis of data became cheaper and faster. In this chapter we are going to look at the main algorithms 
 that were tested and applied in the project, and give some more depth in the algorithms and mathematics behind each of them.
 
-\todo{Object tracking?}
+\section{Smoothing}\label{sec:smooth}\todo{MER!!!}
+Smoothing is a normal technique in computer vision to remove artefacts and noise from images. The normal way 
+of smoothing a image is to apply a filter to each pixel of the image through convolution. This makes 
+all filter knowledge from the field of signal processing available.
+
+The use of convolution also standardizes the structure of filters, and makes them easy interchangeable. Some 
+of the most used filter kernels are shown in the following sections.
+
+\subsection{Normalized Box Filter}\label{sec:box.filter}
+The box filter with normalization is the simplest of all filters. Each pixel is convolved with a kernel 
+that weights all neighbouring pixels equally.
+
+\subsection{Gaussian Filter}\label{sec:gaussian.filter}
+This is the most used filter. The kernel used in this filter approximates a Gaussian function. This kernel 
+is usually generated based on a set size with given mean and variance which is then normalized.
+
+\subsection{Median Filter}\label{sec:median.filter}
+This filter is almost as easy as the Normalized Box filter in section \vref{sec:box.filter}. The only difference is that 
+in stead of a normalized identity kernel, this kernel is the median of the pixel values of the neighbourhood.
+
+\section{Hough Algorithms}
+The set of Hough algorithms uses a trick to find lines in a image. The trick is 
+instead of using the Cartesian description $y(x)=ax+b$ for lines, to rather use the 
+a polar parametrization $r(\theta) = x_0\cos \theta + y_0\sin \theta$. This $(r,\theta)$
+space is the usually denoted as the Hough space.
+
+\subsection{Hough Line Transform}\label{sec:hough.transform}
+
+\subsection{Probabilistic Hough Line Transform}
+
+
+\subsection{Hough Circle Transform}\label{sec:hough.circles}
+To use the algorithm previously shown to detect circles, a bit more information is needed. 
+The circle with center $(x_0,y_0)$ will be defined by $C:\{x_0,y_0,r\}$ where $r$ is the radii.
+Other than that, the algorithm is the same as the one in section \vref{sec:hough.transform}.
+
 
 \section{Aperture Problem}\label{sec:aperture.problem}
 The aperture problem in computer vision usually arises during optical flow problems. The issue is that 
 any differential flow algorithm is only able to determine flow that is normal to the edge which is being traced.
-This means that other flow components that is not normal to a edge are not determined.
+This means that other flow components that is not normal to a edge are not possible to determine.
 
 \begin{figure}
 	\centering
@@ -23,9 +58,9 @@ This means that other flow components that is not normal to a edge are not deter
 		\node at (1.2,1.2) {$\vec{v}$};
 		\node at (-0.8,-1.2) {$\vec{v}$};
 		\node at (0.3,-0.0) {$\vec{n}$};
+		\node at (-0.3, 1.1) {$\mathfrak{S}$};
 	\end{tikzpicture}
-	\caption{Aperture problem, figure inspired by \citet{Yazdanbakhsh20111093}. If we see through the circle, then the 
-		movement along $\vec{v}$ looks like movement along $\vec{n}$ since $\vec{n}$ is the only normal direction to the edge.}
+	\caption{Aperture problem, figure inspired by \citet{Yazdanbakhsh20111093}. If the line defined by $\vec{n}$ is observed only in the area defined by $\mathfrak{S}$, then any movement along any $\vec{v}$ will be observed as movement along $\vec{n}$.}
 	\label{fig:aperture}
 \end{figure}
 
