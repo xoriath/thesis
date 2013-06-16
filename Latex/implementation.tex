@@ -22,12 +22,21 @@
 		\node() at (8, -2) {Pleora SB-Pro Gigabit};
 		
 		% U-SDI
-		\filldraw[fill=green!40!white] (12,2) rectangle (15,3);
-		\node() at (13.5, 2.5) {Ultrastudio SDI};
+		\filldraw[fill=black!20!white] (13.15,2) rectangle (16,3);
+		\node() at (14.5, 2.5) {Ultrastudio SDI};
 		
 		% PC
-		\filldraw[fill=green!40!white] (18,-3) rectangle (20,3);
+		\filldraw[fill=magenta!20!white] (18,-3) rectangle (20,3);
 		\node() at (19,0) {Computer};
+		
+		% Horiz lines
+		\draw[thick,dotted] (10.2,5) -- (10.2,-4);
+		\draw[thick,dotted] (12.95,5) -- (12.95,-4);
+		
+		% Top lines
+		\node() at (9, 4.5){Remote};
+		\node() at (11.5, 4.5){Transmission};
+		\node() at (14, 4.5){Local};
 		
 		% Signal lines from camera
 		\draw[] (2, 0.5) -- (5, 0.5) node [midway, above] {LVDS};
@@ -42,16 +51,16 @@
 		\draw[->] (5, -0.5) -- (5.5, -0.5) -- (5.5, -2.5) -- (6, -2.5); % TTL
 		
 		% Signal line from EM to U-SDI
-		\draw[->] (10,2.5) -- (12, 2.5) node [midway, above]{HD-SDI};
+		\draw[->] (10,2.5) -- (13.15, 2.5) node [midway, above]{HD-SDI};
 		
 		% Signal line from U-SDI, HDMI
-		\draw[->] (13.5,3) -- (13.5, 3.5) -- (15, 3.5) node [midway, above]{HDMI};
+		\draw[->] (14.5,3) -- (14.5, 3.5) -- (15, 3.5) node [midway, above]{HDMI};
 				
 		% Signal line from EM to PC
 		\draw[<->] (10,1.5) -- (18, 1.5) node [midway, below]{RS232}; 
 		
 		% Signal line from U-SDI to PC
-		\draw[->] (15, 2.5) -- (18, 2.5) node [midway, above]{USB 3.0};
+		\draw[->] (16, 2.5) -- (18, 2.5) node [midway, above]{USB 3.0};
 		
 		% Signal line from PL to PC
 		\draw[<->] (10,-2) -- (18, -2) node [midway, above]{Ethernet; Video and two-way communication}; 
