@@ -196,8 +196,9 @@ done using a PCI Express card that can support multiple HD-SDI streams simultane
 
 This is however not practical, as we are going to use different computers and laptops during our testing. 
 It would therefore be better to get a external capture interface that connects to the computers using a 
-external computer interface. Thankfully, with the developmen of USB 3.0 we are able 
-to support the bandwidth requirements for HD signal.
+external computer interface. Thankfully, with the development of USB 3.0 we are able 
+to support the bandwidth requirements for HD signal, as the USB 3.0 has a theoretical maximum bitrate 
+at \SI{5}{\giga bit\per\second}.
 
 The Ultrastudio SDI from Blackmagic Design was chosen as the stream grabber. This is a industry standard 
 supplier that recently developed this external capture unit. More information on this can be found at 
@@ -215,7 +216,7 @@ extra HDMI out makes it easy to connect a external monitor while capturing to ge
 
 The ethernet module described in \autoref{sec:hw.gige}.uses multicast technology to transfer the video stream over IP. The 
 card comes with a open SDK to discover and stream from any unit on the local network. As a added bonus, the 
-ethernet module allows the VISCA control commands from \autoref{sec:visca} to be transferred over the same 
+ethernet module allows the VISCA control commands from section \vref{sec:visca} to be transferred over the same 
 ethernet connection, removing the need for extra signalling cabling.
 
 \section{Software}
@@ -232,7 +233,7 @@ to change resolution on demand, jitter removal and different behavioural aspects
 
 Blackmagic provides the Media Express platform for capture. This is a basic but useful starting point. The main 
 drawback is the small amount of capture formats available in the software, and the frequent crashes that were experienced 
-during use. However, the program were stable during capture, and it is capable to capture to YUV 8 bit which means almost 
+during use. However, the program were stable during capture, and it is capable to capture to YUV-8 bit which means almost 
 as raw data as possible. This format is also easy to re-encode to other formats at a later stage for storage. 
 
 It turned out that the image processing stack used in the project also were capable to connect directly to the Ultrastudio unit. 
