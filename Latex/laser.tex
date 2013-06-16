@@ -90,9 +90,46 @@ points. The error would then be a measure of the deformation caused by movement 
 
 \begin{figure}[htbp]
     \centering
-    \subfloat[Simulated points]{\label{fig:ellipsis_1}{\includegraphics[width=0.75\textwidth]{ellipsis_1}}}
+    \subfloat[Simulated points]{\label{fig:ellipsis_1}{\includegraphics[width=1\textwidth]{ellipsis_1}}}
     \\
-    \subfloat[Detected ellipsis]{\label{fig:ellipsis_2}{\includegraphics[width=0.75\textwidth]{ellipsis_2}}}
-	\caption{Simulation of a projected ellipsis and the detected ellipsis}
+    \subfloat[Detected ellipsis]{\label{fig:ellipsis_2}{\includegraphics[width=1\textwidth]{ellipsis_2}}}
+	\caption{Simulation of a projected ellipsis and the detected ellipsis. Blue point sets are set to vibrate in a random pattern, green dot is the detected point and blue circle is the fitted ellipsis.}
 	\label{fig:ellipsis}
 \end{figure}
+
+The implementation shown in figure \vref{fig:ellipsis} proved to be quite accurate and stable.
+A test pattern was generated where a random number of points were laid out on a 
+elliptical path where the points were allowed to move in all directions. As figure \vref{fig:ellipsis_2} shows, points 
+that diverge much from the elliptical path does not affect the found ellipsis in a great deal.
+
+\section{Algorithm}
+The algorithm used to generate the ellipsis in \vref{fig:ellipsis_2} is based on a chain of standard 
+computer vision algorithms and filters. The chain consists of
+
+\begin{enumerate}
+	\item Color conversion to grayscale.
+	\item Gaussian smoothing. See section \vref{sec:gaussian.filter}.
+	\item Detection of points using the Hough Circle algorithm. See section \vref{sec:hough.circles}.
+	\item Discarding of points outside the ROI.
+	\item Use the \citet{fitzgibbon95} algorithm to fit a ellipsis over the remaining points.
+\end{enumerate}
+
+\section{Hardware}
+To manufacture the hardware, a specification were developed together with Diode Laser Concepts, INC\footnote{\url{www.diodelaserconcepts.com}}. This is a reseller that 
+specializes in all sorts of laser equipment, and has been use by the institute before. It turned out that circular laser 
+are not a normal configuration, so after some discussion we were referred to Frankfurt Laser Company\footnote{\url{www.frlaserco.com}} which 
+is a laser manufacturer based in Europe.
+
+After even more discussions with Frankfurt Laser Company, it became clear that manufacturing such a specialized laser as the one 
+required would be difficult. The first quote had a minimum order of 1,500 units. Due to the high manufacturing cost for single 
+units, the efforts for acquiring a laser were cancelled.
+
+The lack of laser hardware means that the algorithm used to detect ellipsis was never proven to work outside of simulations. Real life 
+data on the performance of the detector were therefore not available. However, based on the dynamic simulations, the ellipsis were always 
+detected successfully. The quality of the fitting is very reliant on the number of points which are detected. Even though the 
+algorithm claims to work as long as it has 5 points or more, it is obvious that the fit gets better with more points.
+
+Even with detection errors as shown in figure \vref{fig:ellipsis_2} where points are being detected on the background and some points that should 
+have been detected are not, the fitting seems quite robust. This is partly because of the least square error minimize the \citet{fitzgibbon95} algorithm, 
+and partly as the number of point clearly describes a ellipsis. If many points start to diverge from the approximate path, the fit get increasingly worse.
+
