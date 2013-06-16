@@ -5,7 +5,7 @@ import numpy
 import operator
 
 
-def draw_flow(im, flow, step=8):
+def draw_flow(im, flow, step=32):
 	global move
 	h, w = im.shape[:2]
 	y, x = numpy.mgrid[step/2:h:step, step/2:w:step].reshape(2, -1)
