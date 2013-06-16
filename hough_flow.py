@@ -22,24 +22,24 @@ def draw_flow(im, flow, step=16):
 def generate_hough(gray):
 	lines = 0
 	edges = cv2.Canny(gray, 50, 200)
-	lines = cv2.HoughLinesP(edges, 1, math.pi/180, 100)
+	lines = cv2.HoughLines(edges, 1, math.pi/180, 100)
 	vis = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
-	#for rho, theta in lines[0][:100]:
-	#	a = math.cos(theta)
-	#	b = math.sin(theta)
-	#	x0 = a * rho
-	#	y0 = b * rho
-	#	x1 = int(x0 + 1000 * (-b))
-	#	y1 = int(y0 + 1000 * (a))
-	#	x2 = int(x0 - 1000 * (-b))
-	#	y2 = int(y0 - 1000 * (a))
-	#	cv2.line(vis, (x1,y1), (x2,y2), (0, 255, 0), 1)
-	for x1,y1,x2,y2 in lines[0]:
-		cv2.line(vis, (x1,y1), (x2,y2), (0,255,0), 2)
+	for rho, theta in lines[0][:100]:
+		a = math.cos(theta)
+		b = math.sin(theta)
+		x0 = a * rho
+		y0 = b * rho
+		x1 = int(x0 + 1000 * (-b))
+		y1 = int(y0 + 1000 * (a))
+		x2 = int(x0 - 1000 * (-b))
+		y2 = int(y0 - 1000 * (a))
+		cv2.line(vis, (x1,y1), (x2,y2), (0, 255, 0), 1)
+#for x1,y1,x2,y2 in lines[0]:
+#		cv2.line(vis, (x1,y1), (x2,y2), (0,255,0), 2)
 	return vis
 	
 	
-cap = cv2.VideoCapture('/home/moro/Dropbox/Litteratursøk/video/horisontal_rift_1.mp4')
+cap = cv2.VideoCapture('/home/moro/Dropbox/Litteratursøk/video/referanse_fart.mp4')
 
 ret, im = cap.read()
 prev_gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
@@ -55,10 +55,10 @@ while True:
 	except TypeError:
 		None
 	
-	#flow = cv2.calcOpticalFlowFarneback(prev_gray,gray,0.5,1,3,15,3,5,1)
-	#prev_gray = gray
+	flow = cv2.calcOpticalFlowFarneback(prev_gray,gray,0.5,1,3,15,3,5,1)
+	prev_gray = gray
 
     # plot the flow vectors
-	#cv2.imshow('Optical flow',draw_flow(gray,flow))
+	cv2.imshow('Optical flow',draw_flow(gray,flow))
 	if cv2.waitKey(10) == 27:
 		break
