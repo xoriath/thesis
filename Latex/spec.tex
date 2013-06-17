@@ -5,15 +5,22 @@ hardware used by Argus in their underwater vehicles. This gives us
 a scenario closer to the real hardware, and imposes the same 
 restrictions on us as would be imposed in real world applications.
 
+This chapter goes through the main specifications of the hardware, its consistency with 
+regards to what is available on ROVs, and comparisons where different techniques are available.
+A introduction is also made to the software platform that were chosen, and some of the considerations 
+regarding that choice.
+
 \section{Hardware}
 
 \subsection{Argus hardware}\label{sec:argus_hw}
 The hardware used by Argus is only mentioned as 
-\begin{quote}
-$1\times$ Foc/Zoom camera \\
-Optional HDTV Camera 1080i \\
-$1\times$ Lowlight Black \& White camera \\
-\end{quote}
+
+\begin{itemize}
+	\item $1\times$ Foc/Zoom camera
+	\item Optional HDTV Camera 1080i
+	\item $1\times$ Lowlight Black \& White camera
+\end{itemize}
+
 in \citet{argusROV}. After some mailing with Argus, they provided us 
 with the specific details of this HD Camera, which is what we are interested in. 
 The most interesting parts of the camera specification is shown in table \vref{tbl:fcbh11}.
@@ -155,19 +162,19 @@ seen in \autoref{fig:resolutions}.
 		\filldraw[fill=green!20!white] (0,0) rectangle (12.8,7.2);
 		\filldraw[fill=red!20!white] (0,0) rectangle (7.2,4.80);
 		
-		\node() at (3.6,3.6){720};
-		\node() at (6,2.4){480};
+		\node() at (3.6,3.6){720 px};
+		\node() at (6,2.4){480 px};
 		
-		\node() at (6.8,6){1280};
-		\node() at (11,3.6){720};
+		\node() at (6.8,6){1280 px};
+		\node() at (11,3.6){720 px};
 		
-		\node() at (9.7,9.6){1920};
-		\node() at (17,5.4){1080};
+		\node() at (9.7,9.6){1920 px};
+		\node() at (17,5.4){1080 px};
 		
-		\node() at (19.2,20.4){3840};
-		\node() at (36.7,10.8){2160};
+		\node() at (19.2,20.4){3840 px};
+		\node() at (36.7,10.8){2160 px};
 	\end{tikzpicture}
-	\caption{Scales of different resolutions. Red: DVD, Green: 720p, Light Blue: 1080p, Blue: UHD (4K)}
+	\caption{Scales of different resolutions. Red: DVD, Green: 720p, Light Blue: 1080p, Blue: UHD (4K).}
 	\label{fig:resolutions}
 \end{figure}
 
