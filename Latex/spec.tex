@@ -76,9 +76,10 @@ black and white or negative images that is being processed by the image processo
 makes the camera very versatile, either by direct control from a PC using a TTL level translator or 
 by any micro controller using USART.
 
-Sony provides a basic program for implementing VISCA. In addition to this, a open source C library for Windows, Linux and 
-AVR is available at \url{http://sourceforge.net/projects/libvisca/}. This makes it very easy to 
-integrate VISCA into the software if needed.
+Sony provides a basic program for testing and driving equipment through VISCA. In addition to this, a open source C library for Windows, Linux and 
+AVR called libVISCA\footnote{Available at \url{http://sourceforge.net/projects/libvisca/}} has been developed. This makes it very easy to 
+integrate VISCA into the software if needed as either a component or as a separate library. This also gives any software the 
+possibility to control the camera to tweak the image stream.
 
 \begin{figure}[htbp]
 	\centering
@@ -112,14 +113,14 @@ different configurations and combinations. A comparison of the different technol
 			6G-SDI				& Undecided\tablefootnote{Still in draft}& $\approx$ \SI{300}{\metre}& NRZI			& 0\% \\
 		\bottomrule	
 	\end{tabular}
-	\caption{Different signalling systems}
+	\caption{Different signalling and transmission systems available for video streaming.}
 	\label{tbl:transmission_systems}
 \end{table}
 
 
 For this project, it was decided that we should 
 try to get a interface that did have more capacity than the camera produces. Looking 
-at the different options in \vref{tbl:transmission_systems}, and also thinking of the transmission length, HD-SDI
+at the different options in \vref{tbl:transmission_systems}, the system from Argus and also thinking of the transmission length, HD-SDI
 was chosen as the desired technology for transferring the video stream from the camera.
 
 \subsubsection{HD-SDI}\label{sec:hdsdi}
@@ -153,7 +154,7 @@ is a simple extension allowing two HD-SDI streams on one cable. The 3G version s
 without changing the bitrate relative to the Dual Link. However, the 3G version is has full 
 capability of 1080p streams at \SI{60}{\hertz}. Finally, the 6G version is a new and upcoming version made 
 specifically for the new 4K, also known as Ultra HD, video format. The differences between the different resolutions can be 
-seen in \autoref{fig:resolutions}.
+seen in figure \ref{fig:resolutions}.
 
 \begin{figure}[htbp]
 	\begin{tikzpicture}[scale=0.34]
@@ -259,3 +260,4 @@ were the cause of the shift from using Matlab as prototype platform to using Pyt
 as the one used in C++.
 
 \subsection{Real time considerations}
+
