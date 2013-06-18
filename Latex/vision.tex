@@ -28,18 +28,51 @@ in stead of a normalized identity kernel, this kernel is the median of the pixel
 \section{Hough Algorithms}
 The set of Hough algorithms uses a trick to find lines in a image. The trick is 
 instead of using the Cartesian description $y(x)=ax+b$ for lines, to rather use the 
-a polar parametrization $r(\theta) = x_0\cos \theta + y_0\sin \theta$. This $(r,\theta)$
-space is the usually denoted as the Hough space.
+a polar parametrization in equation \eqref{equ:hough.space}.
+
+\begin{equation}\label{equ:hough.space}
+	r(\theta) = x_0\cos \theta + y_0\sin \theta
+\end{equation}
+
+This $(r,\theta)$ space from equation \eqref{equ:hough.space}
+is usually denoted as the Hough space.
+
+The following sections describe different specific implementations of the Hough algorithm. For 
+deeper details on these algorithms, please see \citet{sonka07} for a full description and 
+a good description of the different sub algorithms.
 
 \subsection{Hough Line Transform}\label{sec:hough.transform}
+The \gls{hlt}, usually called just the Hough Transform, uses equation \eqref{equ:hough.space} together 
+with a global accumulator matrix. For each pixel in the image that is being analysed, the equation is being applied 
+to each pixels and its neighbours. If there are enough evidence that there is a line at that point, the accumulator 
+is incremented at the position that indicates the found line.
+
+When the whole image has been analysed, the accumulator is inspected. Lines should travel through multiple points, 
+each which would increment the accumulator leading to peaks. Each peak in the accumulator corresponds to 
+a line in the $(r, \theta)$ space, and can be extracted and recreated.
 
 \subsection{Probabilistic Hough Line Transform}
+The \gls{phlt} is a extension to the \gls{hlt}. The extension consists of 
+some sort of probabilistic function that is applied after the accumulation has been done. This 
+function can either be a a-priori function 
+that describes the probability of the existence of lines at a given point. 
+
+Another 
+normal version uses a least square approach. This does not need any a-priori knowledge,
+and is therefore the preferred way of implementing this function. The 
+benefit of using this type of algorithm over the \gls{hlt} is that 
+the lines defined by the accumulator no longer has to be global lines. This 
+comes from the fact that a least square solution can terminate a line if the error between the described 
+line and the probability of the line in the image goes beyond a given threshold. 
 
 
 \subsection{Hough Circle Transform}\label{sec:hough.circles}
 To use the algorithm previously shown to detect circles, a bit more information is needed. 
-The circle with center $(x_0,y_0)$ will be defined by $C:\{x_0,y_0,r\}$ where $r$ is the radii.
+The circle with centre $(x_0,y_0)$ will be defined by $C:\{x_0,y_0,r\}$ where $r$ is the radii.
 Other than that, the algorithm is the same as the one in section \vref{sec:hough.transform}.
+
+There are also a Cartesian implementation of this algorithm, in which each pixel is assumed to 
+be the centre of a circle. 
 
 
 \section{Aperture Problem}\label{sec:aperture.problem}
@@ -72,7 +105,7 @@ modern algorithms will try to trace on corners, as a corner by definition is mad
 \section{Optical flow}
 Optical flow is a term that covers the apparent motion of objects, specifically its edges and surfaces 
 relative to an observer. The term was first coined for this by James Gibson in the 1940s 
-to describe the visual stimulus that animals get from movement\citet{gibson50}.
+to describe the visual stimulus that animals get from movement in \citet{gibson50}.
 
 
 \subsection{Theory}
