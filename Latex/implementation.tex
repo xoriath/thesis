@@ -1,8 +1,46 @@
 
-\chapter{System implementation}
+\chapter{System Implementation}
 
 
-\section{Hardware setup}
+\section{Hardware Setup}
+
+\subsection{Camera}
+
+\subsection{HD-SDI interface card}
+The HD-SDI card can be mounted onto a small bracket on the back of the camera. This gives a small 
+footprint for the unit. The card is mounted as shown in figure \ref{fig:hd-sdi.card}, where all the connectors are described in 
+the figure caption.
+
+The interface has a couple of different functions in the setup. Mainly it does the conversion and 
+packing of the LVDS signal from the camera into HD-SDI according to both the HD-SDI protocol and the electrical specification. 
+The video data is then available on a MCX7 connector which can be connected to normal BNC using a provided adapter.
+
+There are also a big flat flex cable between the camera and the interface card. This cable is mainly used for sending and receiving the VISCA commands 
+to and from the camera. In this situation the interface card provides a level translator so that the signal can be connected directly to a serial 
+port on a computer. This serial signal is available on a breakout cable, together with ground references and the analog video outputs from the camera. 
+
+The card also has a single status led to indicate what operating mode the HD-SDI bus is in. On startup the led will be red. This means that 
+the video input can not be streamed out to the HD-SDI interface. This usually resolves itself during the setup of the HD-SDI interface between the 
+card and the recipient on the other side of the cable. When the setup process is completed, the led will change to green indicating that 
+the card is now streaming data. 
+
+During power up, the camera will close and open the iris. This indicates that at least power is getting through. During HD-SDI setup, the camera 
+will continue to do this, and it will make clicking sounds. This is a good way of getting feedback without having to constantly 
+looking at the interface card.
+
+\begin{figure}
+ 	\centering
+ 	\includegraphics[width=0.94\textwidth]{em1571_real}
+ 	\caption{EM15710 connected to the camera. Blue flat cable on the top is LVDS from camera. Gray flat flex to the left contains 
+ 		analog HD, communication and power to the camera. Multicolor molex in the bottom middle contains the analog video signals and level translated communication signals. Molex on the top is power. Gold MCX/BNC is HD-SDI out. Status led on the top left corner is red during signal locking and green during normal operation.}
+ 	\label{fig:hd-sdi.card}
+\end{figure}
+
+\subsection{Underwater Housing}
+
+\subsection{Cabling}
+
+\subsection{Hardware Schematic}
 
 \begin{sidewaysfigure}
 	\centering
@@ -65,6 +103,14 @@
 		% Signal line from PL to PC
 		\draw[latex-latex] (10,-2) -- (18, -2) node [midway, above]{Ethernet; Video and two-way communication}; 
 	\end{tikzpicture}
-	\caption{Schematics of the hardware}
+	\caption{Schematics of the hardware, showing both the HD-SDI and the Ethernet pipeline. The different signals and directions are drawn in. 
+		Vertical lines express different domains in the system; Remote things on the camera, Transmission for the place where the long distance signals are sent and Local for what is 
+		near the computer and the receiving end.}
 	\label{fig:hw.schema}
 \end{sidewaysfigure}
+
+\section{Software}
+
+\subsection{Capture software}
+
+\subsection{Capture constraints}
