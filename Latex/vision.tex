@@ -48,6 +48,9 @@ If a image containing $n \times m$ pixels are to be convolved with a $p \times q
 multiplication and additions. If however, the kernel can be separated, the first dimension takes approximately $nmp$ adds and multiplications,
 and the second uses $nmq$. This results in a complexity of $nm(p+q)$ which usually is a smaller number than $nmpq$. The ratio between this is shown in equation \eqref{equ:separation.ratio}.
 
+The approximations that leads to equation \eqref{equ:separation.ratio} is from \citet{eddins06} and is somewhat crude on small dimensions. It is however asymptotically correct 
+for larger dimensions of the kernel. 
+
 \begin{equation}\label{equ:separation.ratio}
 	\frac{nmpq}{nm(p+q)} =\frac{p \times q}{p + q}
 \end{equation}
