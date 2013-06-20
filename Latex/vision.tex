@@ -5,7 +5,9 @@ Computer vision has seen a substantial growth over the last 40 years, as camera 
 and the analysis of data became cheaper and faster. In this chapter we are going to look at the main algorithms 
 that were tested and applied in the project, and give some more depth in the algorithms and mathematics behind each of them.
 
-\section{Smoothing}\label{sec:smooth}\todo{MER!!!}
+Most of the theory in this chapter is collected from \citet{sonka07}, \citet{tdt4265} and \citet{davies05}.
+
+\section{Filtering}\label{sec:smooth}\todo{MER!!!}
 Smoothing is a normal technique in computer vision to remove artefacts and noise from images. The normal way 
 of smoothing a image is to apply a filter to each pixel of the image through convolution. This makes 
 all filter knowledge from the field of signal processing available.
@@ -13,13 +15,59 @@ all filter knowledge from the field of signal processing available.
 The use of convolution also standardizes the structure of filters, and makes them easy interchangeable. Some 
 of the most used filter kernels are shown in the following sections.
 
+\subsection{Image Convolution}
+The normal structure for different filters are usually described using a convolution kernel. This convolution kernel 
+describes how neighbouring pixels will affect the pixels that is about to get filtered. This 
+description is given using the convolution formula in \eqref{equ:conv}.
+
+\begin{equation}\label{equ:conv}
+	f(i,j) = \underset{(m,n) \in \mathcal{O}}{\sum \sum} h(i-m,j-n)g(m,n)
+\end{equation}
+
+In equation \eqref{equ:conv} the $f$ denotes the resulting pixel value, $g$ is the original pixel and $h$ is the convolution mask or kernel.
+In this context, $\mathcal{O}$ denotes the set of pixels in the neighbourhood of $(i,j)$ for which the kernel is non zero.
+
+The easiest example of a convolution kernel is the averaging kernel. The averaging coefficient is dependent on the dimensions of the kernel. 
+A averaging kernel of dimension $3 \times 3$ is shown in \eqref{equ:average.kernel}. This kernel gives a pixel the average weight of all 
+neighbouring pixels.
+
+\begin{equation}\label{equ:average.kernel}
+	h = \frac{1}{9}
+	\begin{bmatrix}
+		1 & 1 & 1 \\
+		1 & 1 & 1 \\
+		1 & 1 & 1 \\
+	\end{bmatrix}
+\end{equation}
+
+The convolution operation is quite a expensive operation. This has lead to a favouring towards separable kernels. Kernels 
+that are separable has the property that they can be decomposed into two one dimensional filters. The computational 
+gain of this can be quite significant. 
+
+If a image containing $n \times m$ pixels are to be convolved with a $p \times q$ kernel, this takes approximately $nmpq$ 
+multiplication and additions. If however, the kernel can be separated, the first dimension takes approximately $nmp$ adds and multiplications,
+and the second uses $nmq$. This results in a complexity of $nm(p+q)$ which usually is a smaller number than $nmpq$. The ratio between this is shown in equation \eqref{equ:separation.ratio}.
+
+\begin{equation}\label{equ:separation.ratio}
+	\frac{nmpq}{nm(p+q)} =\frac{p \times q}{p + q}
+\end{equation}
+
+This causes a $9 \times 9$ kernel to have a computational gain of $\frac{9 \times 9}{9 + 9} = 4.5$ using this principle of separable kernels. The ratio 
+will increase in benefit for separability if the dimensions increase.
+
 \subsection{Normalized Box Filter}\label{sec:box.filter}
 The box filter with normalization is the simplest of all filters. Each pixel is convolved with a kernel 
-that weights all neighbouring pixels equally.
+that weights all neighbouring pixels equally. One example of this kernel has already been shown in \eqref{equ:average.kernel}.
 
 \subsection{Gaussian Filter}\label{sec:gaussian.filter}
 This is the most used filter. The kernel used in this filter approximates a Gaussian function. This kernel 
 is usually generated based on a set size with given mean and variance which is then normalized.
+
+This kernel would be a discrete approximation to the two dimensional Gaussian filter equation shown in equation \eqref{equ:filter.gaussian}.
+
+\begin{equation}\label{equ:filter.gaussian}
+	g(x,y) = \frac{1}{2 \pi \sigma^2}e^{-\frac{x^2 + y^2}{2 \sigma^2}}
+\end{equation}
 
 \subsection{Median Filter}\label{sec:median.filter}
 This filter is almost as easy as the Normalized Box filter in section \vref{sec:box.filter}. The only difference is that 
