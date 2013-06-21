@@ -1,16 +1,26 @@
 
 
 \chapter{Laser-based Orientation}
-In this...
+This chapter describes the work done to enhance the laser based guidance developed in \citet{carlsen10}. The 
+use of lasers to project a known geometrical shape onto the net is thought to be a good way to get consistent 
+information on the orientation relative to the net. It is important to check which figures that would be easy 
+to recognize in software, and also gives a good indication on both rotation, tilting and distance relative to the net. 
 
 \section{Projections}
 The use of some regular and known geometrical shape that could be projected onto the net for use for orientation 
-was early put forward. The idea behind this is based on the work by \citet{carlsen10}, who used 
-a set of line lasers for \todo{Hva var dette egentlig?}
+was put forward quite early. The idea behind this is based on the work by \citet{carlsen10}, who used 
+a set of line lasers used to measure the distance between the \gls{rov} and the net. 
+
+This is 
+done by projecting the lines onto the net, so that two lines of red dots 
+appear. Since the lines are projecting parallel lines, the dots should line up with 
+a median distance between them. This distance can be counted in pixels and used as a 
+proportional measure of the distance, as the distance between the points follows a inverse 
+relationship with the distance to the net.
 
 \section{Patterns}
 There are many different patterns that may give more information about 
-orientation of the ROV relative to the net than some simple lines. The 
+orientation of the \gls{rov} relative to the net than some simple lines. The 
 different polygons in figure \vref{fig:pattern_triangle} to \vref{fig:pattern_heptagon}
 were chosen as a good start for further investigation together with the 
 circle as shown in \vref{fig:pattern_circle}.
@@ -61,7 +71,8 @@ Criteria for a good pattern should contain
 \begin{enumerate}
 	\item Not ambiguous when interpolating lines
 	\item Easy algorithm to reconstruct shape
-	\item Try to give orientation information\footnote{Avoid aperture problem, see section \vref{sec:aperture.problem}}
+	\item Try to give orientation information
+	\item Avoid the aperture problem, see section \vref{sec:aperture.problem}
 \end{enumerate}
 
 It can be shown that amongst the patterns in figure \vref{fig:laser_pattern} that all patterns with a even number 
@@ -82,7 +93,7 @@ to be the best choice.
 
 A circle can not convey any orientation data, as there are no corners and vertices to link a angle to the net onto which it is projected.
 It can however give information on distance to the net by checking the amount of masks in the net that is inside the circle. The 
-deformation of the circle will also give information on the tilt of the ROV relative to the net. The shape that would be read back in 
+deformation of the circle will also give information on the tilt of the \gls{rov} relative to the net. The shape that would be read back in 
 this case would be a ellipsis. The ration of the minor- and major axis in the ellipsis would give estimates on these angles. 
 
 Ellipsis are quite easy to detect using computer vision. The most used algorithm is described in \citet{fitzgibbon95}. This algorithm fits a ellipsis onto a set of points, usually >5 is needed. The algorithm optimizes the error of the found ellipsis for all 
@@ -133,3 +144,4 @@ Even with detection errors as shown in figure \vref{fig:ellipsis_2} where points
 have been detected are not, the fitting seems quite robust. This is partly because of the least square error minimize the \citet{fitzgibbon95} algorithm, 
 and partly as the number of point clearly describes a ellipsis. If many points start to diverge from the approximate path, the fit get increasingly worse.
 
+\todo{MER}
