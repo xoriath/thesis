@@ -176,7 +176,8 @@ If the deltas in equation \eqref{equ:image.constraint} is assumed to be small, t
 		\frac{\partial I}{\partial y} \Delta y + \frac{\partial I}{\partial t} \Delta t + \mathcal{O}(\partial^2)
 \end{equation}
 
-Equation \eqref{equ:image.constraint.taylor} contains a higher order collection term $\mathcal{O}(\partial^2)$. This can be thought of the error in this first order taylor approximation. As
+Equation \eqref{equ:image.constraint.taylor} contains a higher order collection term \glslink{hot}{\ensuremath{\mathcal{O}(\partial^2)}}
+. This can be thought of the error in this first order Taylor approximation. As
 the deltas are assumed small, then the Taylor expansion terms with order higher than one is negligible. 
 
 Substituting equation \eqref{equ:image.constraint} into \eqref{equ:image.constraint.taylor} it is obvious that equation \eqref{equ:taylor.exp} must hold. 
@@ -220,7 +221,7 @@ infers smooth and equal movement of all points between the frames. Also, since t
 in the Fourier shift theorem, which implies that the images are assumed to have a circular shift. The case is, however, that the shift 
 is more likely to be linear, and this discrepancy gives distortions in the cross-correlation.
 
-\subsection{Lukas-Kanade}\label{sec:lukas-kanade}
+\subsection{Lucas-Kanade}\label{sec:lukas-kanade}
 The Lucas-Kanade method is a widely used method for providing the needed constraints to solve \eqref{equ:optical.flow}. This method assumes that 
 the motion between to frames is small and more or less constant in the neighbourhood of a point, known as the velocity smoothness constraint. 
 This means that \eqref{equ:optical.flow} holds for all points within some window
@@ -230,7 +231,7 @@ with the point that is being considered. This means that the local velocity vect
 	\begin{split}
 		I_x(q_1)V_x + I_y(q_1)V_y	&= -I_t(q_1) \\
 		I_x(q_2)V_x + I_y(q_2)V_y 	&= -I_t(q_2) \\
-		&\,\,\, \vdots \\
+		& \,\,\, \vdots \\
 		I_x(q_N)V_x + I_y(q_N)V_y 	&= -I_t(q_N)
 	\end{split}
 \end{equation}
