@@ -192,10 +192,33 @@ to interface with most computers today.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\linewidth]{iport}
+	\includegraphics[width=0.8\textwidth]{iport}
 	\caption{Pleora SB-Pro IP Engine for Sony FCB-H11}
 	\label{fig:iport}
 \end{figure}
+
+\subsubsection{Underwater Lightning}\label{sec:spec.underwater.light}
+The earliest image examples provided from \gls{sintef} shows a very clear light gradient in most images. This is 
+due to the optical dampening that water imposes on the normal flow for light. This means that 
+the light intensity becomes clearly dampened even in shallow waters. It also imposes difficulties 
+during software analysis, as most of the techniques available are not designed 
+to handle strong variation in light intensity in a single frame. The gradient 
+will also change in accordance with the position of the \gls{rov}, and this can cause the motion 
+analysis to skew over time.
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{underwater_gradient_sintef}
+	\caption{Inspection video showing a clear light gradient in underwater conditions}
+	\label{fig:underwater_gradient}
+\end{figure}
+
+Figure \vref{fig:underwater_gradient} shows the provided image from \gls{sintef}. The gradient also makes 
+the horizontal lines in the net stand out more than the vertical lines, as the light gradient moves 
+vertically.The issues with the gradient is minimized by Argus by using a strong LED and HID based light setup. 
+
+\todo{MER!}
 
 \subsubsection{Video stream grabbing}
 The capture of video streams from a HD-SDI interface usually needs specifically designed hardware that 
@@ -260,5 +283,37 @@ algorithms were discovered. Multiple standard algorithms would behave differentl
 were the cause of the shift from using Matlab as prototype platform to using Python as Python uses the same library source 
 as the one used in C++.
 
-\subsection{Real time considerations}
+\subsection{Real time considerations}\label{sec:realt.time.consider}
+This thesis is mainly concerned with the question if the video stream from the camera can be used as a navigational or \glslink{odometric}{odometric} data source. 
+This gives rise to some specific real time issues that needs to be addressed in a working system. The speed is constrained 
+by both the amount of data that the camera produces and the computational power of the system that is doing 
+the end analysis.
 
+For the system to be usable as a data source for navigation, it must have a couple of properties. Some of 
+them are listed below.
+
+\begin{itemize}
+	\item Provide data to the end user within a short time
+	\item Provide data on a format compatible with other equipment
+	\item Provide data that does not have negative affect on the navigation
+	\item Provide consistent data
+\end{itemize}
+
+When the term short time is used in this context, it is meant that the data must arrive at a time after the initial capture that is 
+not long enough for the data to be invalid. This definition is vague by design, as the time 
+for data to invalidate is highly dependent on the system that receives the data. 
+
+Compatibility is also important, as these types of systems usually is interconnected with other 
+systems available to the end user to provide data from multiple sources. This means that 
+data formats should be open and easy to interchange. 
+
+It is also paramount that the data provided should not have a 
+bad impact on the system. If the data is not accurate or has a tendency to drift, then the 
+inclusion of the data may cause the system to degrade. As there are no reason to include 
+data that have adverse effects, then there are no reason to use video as a data source. 
+
+Lastly it is important that the data does not skew or change over time and in different environments. If the 
+system needs to be calibrated as the sun changes its position or if a fish swims in from of the camera, then the 
+system is not a consistent source of data. This again means that the whole navigation system degrades 
+as the data from the video becomes more unusable. It is important to have algorithms which try 
+to minimize the effect of environmental disturbances.
