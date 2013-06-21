@@ -6,7 +6,7 @@ a scenario closer to the real hardware, and imposes the same
 restrictions on us as would be imposed in real world applications.
 
 This chapter goes through the main specifications of the hardware, its consistency with 
-regards to what is available on ROVs, and comparisons where different techniques are available.
+regards to what is available on a normal \gls{rov}, and comparisons where different techniques are available.
 A introduction is also made to the software platform that were chosen, and some of the considerations 
 regarding that choice.
 
@@ -55,13 +55,13 @@ The camera used by Argus is the Sony FCB-H11 \citet{fcbh11}.
 \end{table}
 
 
-As seen in \vref{tbl:fcbh11}, the camera outputs HD Digital LVDS\footnote{Low-Voltage Differential Signal} signals.
+As seen in \vref{tbl:fcbh11}, the camera outputs digital HD video over \gls{lvds} signals.
 Due to the open standard used by this camera, there are quite a few different add-on cards that 
-converts this LVDS signal to other, more robust signals for different applications.
+converts this \gls{lvds} signal to other signalling technologies meant for long distance transmissions.
 
 \subsubsection{VISCA camera control}\label{sec:visca}
 The FCB-H11 can be controlled by the open Sony VISCA protocol. This is based of RS-232C at TTL signal levels
-at 9600 bauds. Newer cameras can support RS-232C at up to 38400 bauds using a 8N1 configuration and no flow control. 
+at 9600 bauds. Newer cameras can support RS-232C at up to 38400 bauds using a \glslink{8N1}{8N1} configuration and no flow control. 
 VISCA contains a rich set of commands to control professional video systems. It is even compatible with 
 the broadcast networking specification of the RS-232C which means that a single signal line can contain 
 8 devices including the PC, as it uses \SI{1}{\byte} for addressing.
@@ -77,8 +77,8 @@ makes the camera very versatile, either by direct control from a PC using a TTL 
 by any micro controller using USART.
 
 Sony provides a basic program for testing and driving equipment through VISCA. In addition to this, a open source C library for Windows, Linux and 
-AVR called libVISCA\footnote{Available at \url{http://sourceforge.net/projects/libvisca/}} has been developed. This makes it very easy to 
-integrate VISCA into the software if needed as either a component or as a separate library. This also gives any software the 
+the Atmel AVR micro controller called libVISCA\footnote{Available at \url{http://sourceforge.net/projects/libvisca/}} has been used. This makes it very easy to 
+integrate the VISCA protocol into the software if needed as either a component or as a separate library. This also gives any software the 
 possibility to control the camera to tweak the image stream.
 
 \begin{figure}[htbp]
@@ -144,7 +144,7 @@ interface is more or less plug-and-play.
 \end{figure}
 
 This interface is coincidentally the same interface used by Argus according to the information that were received from them.
-However, due to the long distance of transmission when a ROV is submerged, Argus does a on-board conversion of the 
+However, due to the long distance of transmission when a \gls{rov} is submerged, Argus does a on-board conversion of the 
 coaxial HD-SDI signal to a optical carrier. The use of a optical medium to transfer HD-SDI is a normal 
 technique when the high definition signals are transferred over a distance that would lead to signal degradation using 
 electrical signalling.
@@ -230,12 +230,13 @@ ethernet connection, removing the need for extra signalling cabling.
 \section{Software}
 The software used is split into two different categories; the video capture software provided by Blackmagic 
 Design or any other compatible platforms, and the video analysis software developed in this project. Fortunately, the Ultrastudio 
-unit comes with WDM\footnote{Windows Device Management} drivers and DSHOW\footnote{Direct Show, part of DirectX} 
+unit comes with \gls{wdm} drivers and \gls{dshow} 
 filters, and a software development kit which makes it somewhat easy to connect to the unit and stream 
-the video from it in real time. 
+the video from it in real time. This means however that the direct capture of the video stream unfortunately is limited to the 
+Windows operating system.
 
 \subsection{High definition video capture}
-In theory, all WDM compatible software can be used to access the video stream from the Ultrastudio unit. It turns out
+In theory, all \gls{wdm} compatible software can be used to access the video stream from the Ultrastudio unit. It turns out
 however that the provided software from Blackmagic has some extra interfaces which makes it a bit easier to use, for instance 
 to change resolution on demand, jitter removal and different behavioural aspects.
 
