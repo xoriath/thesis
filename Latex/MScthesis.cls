@@ -18,7 +18,7 @@
 
 % Text and encoding
 \ifPDFTeX
-   \RequirePackage[utf8]{inputenc}
+   \RequirePackage[utf8x]{inputenc}
    \RequirePackage[T1]{fontenc}
 
    \RequirePackage{lmodern}
