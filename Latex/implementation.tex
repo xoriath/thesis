@@ -49,13 +49,12 @@ the power and control signals.
  		water tight cable connection using a normal 75 $\Omega$ coaxial cable for the video and a Ethernet CAT-5E twisted pair cable for power and serial data.}
  	\label{fig:housing}
 \end{figure}
-
+\todo{Add work scetch of housing?}
 As seen in figure \ref{fig:housing} the housing also comes with a outer mounting bracket in white acrylic. This is used to attach the housing to the underwater 
 part of the rig as described in section \vref{sec:test.rig}. Both the front and back cover of the housing is removable using three screws. To ensure that 
 the housing is waterproof there are also a slot on each cover that has a o-ring that gives a tight seal between the inside of the housing and the covers.
 
 \subsection{Underwater Lights}
-
 To mimic the setup from Argus described in \vref{sec:spec.underwater.light}, some cheaper LED based lights were bought. The lights are two casings 
 which delivers \SI{27}{\watt}. Each casing has 9 LEDS, each rated to \SI{3}{\watt}. The lights are shown in figure \vref{fig:underwater_light}.
 
@@ -72,10 +71,44 @@ is also delivered with a \SI{12}{\volt DC} driver which means that it can be con
 \SI{12}{\volt} source.
 
 \subsection{Cabling}
-The cabling used 
+The cabling used in the test are divided between the video stream and the other cable that provides power and communication with the camera.
+The video stream were transferred using a off the shelf 75 $\Omega$ coaxial cable with standard BNC connectors attached to it. This 
+connects between the HD-SDI interface and the Ultrastudio SDI unit as depicted in figure \vref{fig:hw.schema}.
+
+The secondary cable used were a CAT5E Ethernet Twisted Pair cable. As this is a cable made from eight pair that is twised in four pairs this 
+had enough leads to transport both power and communication. Two of the pairs were used to carry the power to the camera. The last four leads 
+were connected to the RX, TX and GND lines on a a USB-RS232 adapter. This meant that the camera could be controlled over a USB port which 
+is easier on a modern laptop.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+			HD-SDI Interface 									& CAT5E Cable				& RS232 Adapter \\
+		\midrule
+			Pin 1, RXD (Brown)									& Green/White				& Pin 3, TX		\\
+			Pin 2, TXD (Black)									& Blue						& Pin 2, RX		\\
+			Pin 5, GND (Yellow)									& Green						& Pin 5, GND	\\
+		\midrule
+			Power 1, \SI{9}{\volt} $\pm$ \SI{3}{\volt} (Red)	& Orange \& Orange/White	&				\\
+			Power 2 \& 3, GND									& Brown \& Brown/White		&				\\
+		\bottomrule
+	\end{tabular}
+	\caption{Signal cable connections for communication and power}
+	\label{tbl:cabeling.connections}
+\end{table}
 
 
 \subsection{Hardware Schematic}
+Figure \vref{fig:hw.schema} describes how the different parts of the system interconnects. The figure includes the Ethernet interface in addiditon to the 
+HD-SDI interface. The different domains of the system are also shown. This is marked as Local, Transmission and Remote.
+
+Remote in this contex means all the things that are either connected directly to the camera or needs to be within a small distance of the camera. In figure \ref{fig:hw.schema} 
+this includes the two interface cards used. Transmission is the part where all the distance between the camera and the recieving computer. Local points at the part 
+of the systems that are in close vicinity of the recieving computer. 
+
+Figure \ref{fig:hw.schema} also shows all the different signals and directions of the signals. This in addition to table \vref{tbl:cabeling.connections} should 
+give a fairly complete picture of how things are interconnected.
 
 \begin{sidewaysfigure}
 	\centering
