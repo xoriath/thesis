@@ -84,14 +84,14 @@ is easier on a modern laptop.
 	\centering
 	\begin{tabular}{lll}
 		\toprule
-			HD-SDI Interface 									& CAT5E Cable				& RS232 Adapter \\
+			HD-SDI Interface 											& CAT5E Cable				& RS232 Adapter 	\\
 		\midrule
-			Pin 1, RXD (Brown)									& Green/White				& Pin 3, TX		\\
-			Pin 2, TXD (Black)									& Blue						& Pin 2, RX		\\
-			Pin 5, GND (Yellow)									& Green						& Pin 5, GND	\\
+			Pin 1, \glslink{rxd}{RXD} (Brown)							& Green/White				& Pin 3, \glslink{txd}{TXD}	\\
+			Pin 2, \glslink{txd}{TXD} (Black)							& Blue						& Pin 2, \glslink{rxd}{RXD}	\\
+			Pin 5, \glslink{gnd}{GND} (Yellow)							& Green						& Pin 5, \glslink{gnd}{GND}	\\
 		\midrule
-			Power 1, \SI{9}{\volt} $\pm$ \SI{3}{\volt} (Red)	& Orange \& Orange/White	&				\\
-			Power 2 \& 3, GND									& Brown \& Brown/White		&				\\
+			Power 1, \SI{9}{\volt} $\pm$ \SI{3}{\volt} (Red)			& Orange \& Orange/White	&					\\
+			Power 2 \& 3, \glslink{gnd}{GND}							& Brown \& Brown/White		&					\\
 		\bottomrule
 	\end{tabular}
 	\caption{Signal cable connections for communication and power}
@@ -100,12 +100,12 @@ is easier on a modern laptop.
 
 
 \subsection{Hardware Schematic}
-Figure \vref{fig:hw.schema} describes how the different parts of the system interconnects. The figure includes the Ethernet interface in addiditon to the 
+Figure \vref{fig:hw.schema} describes how the different parts of the system interconnects. The figure includes the Ethernet interface in addition to the 
 HD-SDI interface. The different domains of the system are also shown. This is marked as Local, Transmission and Remote.
 
-Remote in this contex means all the things that are either connected directly to the camera or needs to be within a small distance of the camera. In figure \ref{fig:hw.schema} 
-this includes the two interface cards used. Transmission is the part where all the distance between the camera and the recieving computer. Local points at the part 
-of the systems that are in close vicinity of the recieving computer. 
+Remote in this context means all the things that are either connected directly to the camera or needs to be within a small distance of the camera. In figure \ref{fig:hw.schema} 
+this includes the two interface cards used. Transmission is the part where all the distance between the camera and the receiving computer. Local points at the part 
+of the systems that are in close vicinity of the receiving computer. 
 
 Figure \ref{fig:hw.schema} also shows all the different signals and directions of the signals. This in addition to table \vref{tbl:cabeling.connections} should 
 give a fairly complete picture of how things are interconnected.
@@ -178,6 +178,28 @@ give a fairly complete picture of how things are interconnected.
 \end{sidewaysfigure}
 
 \subsection{Test Rig}\label{sec:test.rig}
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+
+	
+	%Bottom line
+
+	\draw (0,0) -- (20,0);
+	%Back
+
+	\draw (2,0) -- (4,3.5);
+
+	\draw (5,0) -- (3.4,5.5);
+
+	\draw (4.4,2) -- (11,0);
+	%Front
+
+	\draw (13.5,0) -- (14.5,4) -- (8,0);
+
+	\end{tikzpicture}
+\end{figure}
 
 \section{Software}
 
