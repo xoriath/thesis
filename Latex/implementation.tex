@@ -178,28 +178,56 @@ give a fairly complete picture of how things are interconnected.
 \end{sidewaysfigure}
 
 \subsection{Test Rig}\label{sec:test.rig}
+The test rig is the same as the one shown in figure \vref{fig:test_dvl}. The rig consists of a scaffold that is extended over water. The rig has a 
+winch that connects to the net and gives the power to lower and raise the net. The speed of the net  movement can also be controlled to some 
+degree using the winch. A schematic of the rig is shown in figure \vref{fig:rig.schema}.
 
 \begin{figure}
 	\centering
-	\begin{tikzpicture}
-
+	\begin{tikzpicture}[scale=0.87]
 	
-	%Bottom line
+	% Bottom line
+	\draw[very thick] (0,0) -- (13.5,0);
+	
+	% Back
+	\draw[thick] (2,0) -- (4,3.5);
+	\draw[thick] (5,0) -- (3.4,5.5);
+	\draw[thick] (4.4,2) -- (11,0);
 
-	\draw (0,0) -- (20,0);
-	%Back
 
-	\draw (2,0) -- (4,3.5);
-
-	\draw (5,0) -- (3.4,5.5);
-
-	\draw (4.4,2) -- (11,0);
-	%Front
-
-	\draw (13.5,0) -- (14.5,4) -- (8,0);
+	% Front
+	\draw[thick] (13.5,0) -- (14.5,4) -- (8,0);
+	
+	% Lines for rope
+	\draw[blue] (14.5, 4) -- (4.2,2.8) -- (3.6,1.5);
+	\draw[latex-latex] (5.2,3.4)--(13.5,4.4) node[midway, above, rotate=7] {Line to winch};
+	\filldraw[blue,fill=blue!40!white] (3.6,1.2) circle [radius=0.3] node[black,below=9pt] {Winch};
+	
+	
+	% Bottom
+	\draw[thick] (7,0) -- (7,-5);
+	
+	% Camera
+	\filldraw[fill=blue!20!white] (7,-4) rectangle (8.5,-5);
+	\draw[dotted] (8.5, -4.25) -- (13.5,-1);
+	\draw[dotted] (8.5, -4.75) -- (13.5,-8);
+	\node() at (7.7,-4.5) {Camera};
+	
+	% Ponton
+	\filldraw[fill=red!20!white] (0,0) rectangle (6,-3);
+	\node() at (3,-1.5){Ponton};
+	
+	% Net
+	\draw[very thick, green!70!black] (14.5,4) -- (14.5,-6);
+	\draw[latex-latex] (15, -4) -- (15,-2) node [midway, right] {Net};
+	
 
 	\end{tikzpicture}
+	\caption{Illustration of the test rig from SINTEF. Black lines denote scaffolding, blue ropes and green the net. Counterweights are stacked on the back 
+		of the rig to keep it steady and horizontal. The camera is submerged and kept in place by scaffolding approximately 1.5 meters below the surface and 2 meters from the net.}
+	\label{fig:rig.schema}
 \end{figure}
+
 
 \section{Software}
 
