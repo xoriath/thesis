@@ -118,11 +118,11 @@ The algorithm used to generate the ellipsis in \vref{fig:ellipsis_2} is based on
 computer vision algorithms and filters. The chain consists of
 
 \begin{enumerate}
-	\item Color conversion to grayscale.
-	\item Gaussian smoothing. See section \vref{sec:gaussian.filter}.
-	\item Detection of points using the Hough Circle algorithm. See section \vref{sec:hough.circles}.
-	\item Discarding of points outside the ROI.
-	\item Use the \citet{fitzgibbon95} algorithm to fit a ellipsis over the remaining points.
+	\item Colour conversion to greyscale.
+	\item Gaussian smoothing. See section \vref{sec:gaussian.filter} for the algorithm.
+	\item Detection of points using the Hough Circle algorithm. See section \vref{sec:hough.circles} for the algorithm.
+	\item Discarding of points outside a \gls{roi}.
+	\item Use the \citet{fitzgibbon95} algorithm to fit an ellipsis over the remaining points.
 \end{enumerate}
 
 \section{Hardware}

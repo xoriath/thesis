@@ -61,7 +61,7 @@ converts this \gls{lvds} signal to other signalling technologies meant for long 
 
 \subsubsection{VISCA camera control}\label{sec:visca}
 The FCB-H11 can be controlled by the open Sony VISCA protocol. This is based of RS-232C at TTL signal levels
-at 9600 bauds. Newer cameras can support RS-232C at up to 38400 bauds using a \glslink{8N1}{8N1} configuration and no flow control. 
+at 9600 bauds. Newer cameras can support RS-232C at up to 38400 baud using a \glslink{8N1}{8N1} configuration and no flow control. 
 VISCA contains a rich set of commands to control professional video systems. It is even compatible with 
 the broadcast networking specification of the RS-232C which means that a single signal line can contain 
 8 devices including the PC, as it uses \SI{1}{\byte} for addressing.
@@ -272,7 +272,7 @@ It turned out that the image processing stack used in the project also were capa
 This meant that the video stream could be fed straight into the different algorithms. This were useful for 
 testing on-line performance, as opposed to storing the stream and doing off-line analysis.
 
-\subsection{High definition video analysis}
+\subsection{High definition video analysis}\label{sec:high_def_video_analysis}
 The de facto standard in computer vision is the OpenCV library. Based on C++, it contains bindings multiple other languages. Especially 
 the Python binding makes quick prototyping easy. Matlab was also considered, as Matlab does contain quite a powerful 
 computer vision toolbox\footnote{Equivalent to library}.

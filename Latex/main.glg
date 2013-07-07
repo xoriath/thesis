@@ -1,0 +1,57 @@
+;; This logfile was generated automatically by `xindy'
+;; at 02.07.2013  21:14:52
+;; Indexstyle: "/tmp/nbEHUK7zUQ", Rawindex: "/tmp/55PATOG4qn", Output: "main.gls"
+
+
+Building indexentry-tree:
+Hierdepth of index is :TREE
+
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+
+Forming letter-groups:
+Letter-group: "Ð¨¼Ú—œ" -> "S"
+Letter-group: "¨Ú®" -> "I"
+Letter-group: "¼Ë®" -> "N"
+Letter-group: "ÃÃ»—ÚËí" -> "O"
+Letter-group: "¨Ë—†ÚÐ¤Ãæ" -> "D"
+Letter-group: "æ¨¼ÃæÐ Ë¨å—Ë »Ã—´" -> "W"
+Letter-group: "ÃÈ—¼†å" -> "O"
+Letter-group: "ÈíÚ¤Ã¼" -> "P"
+Letter-group: "†ÈÈ" -> "C"
+Letter-group: "¬¨Ú" -> "J"
+Letter-group: "»€ËÐ¤€´´¨¼" -> "M"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "†ÈÈ" -> "C"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "¨Ë—†ÚÐ¤Ãæ" -> "D"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "¨Ú®" -> "I"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "¬¨Ú" -> "J"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "»€ËÐ¤€´´¨¼" -> "M"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "¼Ë®" -> "N"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "ÃÃ»—ÚËí" -> "O"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "ÈíÚ¤Ã¼" -> "P"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "Ð¨¼Ú—œ" -> "S"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "æ¨¼ÃæÐ Ë¨å—Ë »Ã—´" -> "W"
+
+makeglossaries messages:
+
+Cannot locate xindy module for language english in codepage utf8x.
+Retrying using default codepage.

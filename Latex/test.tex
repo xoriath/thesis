@@ -13,7 +13,7 @@ a field test was needed, since we were going to use equivalent hardware as to wh
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.9\textwidth]{sintef_not_video_1}
+	\includegraphics[width=\textwidth]{sintef_not_video_1}
 	\caption{Original video provided by \gls{sintef}}
 	\label{fig:sintef_not_1}
 \end{figure}
@@ -31,7 +31,7 @@ were needed to go through with our test.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.9\textwidth]{rig1}
+	\includegraphics[width=\textwidth]{rig1}
 	\caption{Field test for \gls{sintef} using \gls{dvl}}
 	\label{fig:test_dvl}
 \end{figure}
@@ -85,7 +85,7 @@ We approximated the distance between the ROV and the net in figure \vref{fig:sin
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.9\textwidth]{hd_not_all}
+	\includegraphics[width=\textwidth]{hd_not_all}
 	\caption{View of the net from \SI{1.5}{\metre}. This is the default distance for the rig used.}
 	\label{fig:test_hd_referanse}
 \end{figure}
@@ -98,9 +98,81 @@ in figure \ref{fig:test_hd_referanse}.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.9\textwidth]{hd_not}
+	\includegraphics[width=\textwidth]{hd_not}
 	\caption{View of masks in the net at \SI{1.5}{\metre}. Digitally zoomed in post processing.}
 	\label{fig:test_hd_clip}
 \end{figure}
 
 The test was done in accordance with the test patterns described in figure \vref{fig:net_configs}. 
+Nets with different holes were lowered in front of the camera, left hanging for some time, and then lifted up 
+again. In addition to the different nets with holes, one net without holes were also used as a 
+clean reference.
+
+
+
+\section{Video Stream and Quality}
+
+The video collected during the test showed off the superb quality of the camera that were acquired. The camera 
+deals with the low light conditions and the clear light gradient in the image. A still image of the 
+test of the net that contained growth can be seen in figure \vref{fig:video_zoom_2}. 
+
+The image in figure \ref{fig:video_zoom_2} also shows some of the issues with the underwater conditions. 
+The lower right part of the image has a very different light and contrast ratio, as a halo from the 
+sun can be seen. This adds complexity to the algorithms that are to be used, and can in 
+worst case lead to a total loss of data points. 
+
+The zoom level on the camera were also tested. A normal camera will struggle to keep the same colour level 
+during zoom, as the light and colour changes during zoom. As seen in figure \vref{fig:video_zoom_1}, the 
+software in the camera seems to deal with this in an acceptable way. Figure \ref{fig:video_zoom_1} shows
+the edge of the growth region with full zoom. The details in the image is difficult to appreciate 
+when it is shown as still images. For the full effect, the reader should have a look through 
+the video \verb|reference_growth.mp4| that is attached to this report.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{video_zoom_2}
+	\caption{View of masks in and growth simulation on net at \SI{1.5}{\metre}.}
+	\label{fig:video_zoom_2}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{video_zoom_1}
+	\caption{Same view as in figure \ref{fig:video_zoom_2}, but using the optical zoom in the camera.}
+	\label{fig:video_zoom_1}
+\end{figure}
+
+
+
+Another problem with the video stream that were discovered at a later stage, is how the camera behaves during rapid movement. 
+Due to the perceived low light conditions, it seems that the camera increases the shutter speed to allow more 
+light into the camera sensor. 
+
+The shutter speed of the camera during the underwater operation seems to 
+have been \SI{1/50}{\second} which caused motion blurring to be introduced. This 
+causes the masks in the net to be blurred out, resembling that of a 
+Gaussian filter. Back in the office, it was discovered that the camera can lock the 
+shutter in different modes, allowing manual control of the shutter. The camera 
+is capable of a speed of \SI{1/2}{\second} to \SI{1/10000}{\second} in 21 steps. 
+The movement artefacts can be seen in figure \ref{fig:fart_ufok}.
+
+
+\begin{figure}[hbp]
+	\centering
+	\includegraphics[width=\textwidth]{fart_ufok}
+	\caption{The raw video during rapid movement}
+	\label{fig:fart_ufok}
+\end{figure}
+
+
+\section{Software}
+The software used during the field tests were mainly the software provided with the Ultrastudio unit. This capture software provided a stable connection to 
+the Ultrastudio unit. It also made it possible to capture all the sequences that were done as raw video. The raw video could then be compressed on a later 
+stage to ensure that the quality during tests were as close to the raw stream as possible.
+
+\subsection{Capture constraints}
+
+During the initial tests, it was discovered that the throughput of the capture was far greater than that the laptop were able 
+to save to disk. This meant that the capture were done to ram, and push to the disk at a later stage. This meant that the length of each sequence needed to 
+be quite short, as the laptop that were used would exhaust its memory in approximately 30 seconds of capture. This caused frames to 
+be skipped in some of the captured files.

@@ -5,6 +5,8 @@
 \section{Hardware Setup}
 
 \subsection{Camera}
+The camera is described in section \vref{sec:fcb_h11_hw}. There were not done any modifications 
+to the camera itself during the test.
 
 \subsection{HD-SDI Interface Card}
 The HD-SDI card can be mounted onto a small bracket on the back of the camera. This gives a small 
@@ -49,6 +51,13 @@ the power and control signals.
  		water tight cable connection using a normal 75 $\Omega$ coaxial cable for the video and a Ethernet CAT-5E twisted pair cable for power and serial data.}
  	\label{fig:housing}
 \end{figure}
+
+\begin{figure}
+ 	\centering
+ 	\includegraphics[width=0.94\textwidth]{camera_housing_2}
+ 	\caption{Same housing as shown in figure \ref{fig:housing} but showing the nipples for the waterproof cable entries.}
+ 	\label{fig:housing_nipple}
+\end{figure}
 \todo{Add work scetch of housing?}
 As seen in figure \ref{fig:housing} the housing also comes with a outer mounting bracket in white acrylic. This is used to attach the housing to the underwater 
 part of the rig as described in section \vref{sec:test.rig}. Both the front and back cover of the housing is removable using three screws. To ensure that 
@@ -60,7 +69,7 @@ which delivers \SI{27}{\watt}. Each casing has 9 LEDS, each rated to \SI{3}{\wat
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{led_light}
+	\includegraphics[width=0.94\textwidth]{led_light}
 	\caption{Underwater LED lights mounted on a plywood backing plate}
 	\label{fig:underwater_light}
 \end{figure}
@@ -184,7 +193,7 @@ degree using the winch. A schematic of the rig is shown in figure \vref{fig:rig.
 
 \begin{figure}
 	\centering
-	\begin{tikzpicture}[scale=0.87]
+	\begin{tikzpicture}[scale=0.79]
 	
 	% Bottom line
 	\draw[very thick] (0,0) -- (13.5,0);
@@ -194,7 +203,6 @@ degree using the winch. A schematic of the rig is shown in figure \vref{fig:rig.
 	\draw[thick] (5,0) -- (3.4,5.5);
 	\draw[thick] (4.4,2) -- (11,0);
 
-
 	% Front
 	\draw[thick] (13.5,0) -- (14.5,4) -- (8,0);
 	
@@ -203,7 +211,6 @@ degree using the winch. A schematic of the rig is shown in figure \vref{fig:rig.
 	\draw[latex-latex] (5.2,3.4)--(13.5,4.4) node[midway, above, rotate=7] {Line to winch};
 	\filldraw[blue,fill=blue!40!white] (3.6,1.2) circle [radius=0.3] node[black,below=9pt] {Winch};
 	
-	
 	% Bottom
 	\draw[thick] (7,0) -- (7,-5);
 	
@@ -211,7 +218,7 @@ degree using the winch. A schematic of the rig is shown in figure \vref{fig:rig.
 	\filldraw[fill=blue!20!white] (7,-4) rectangle (8.5,-5);
 	\draw[dotted] (8.5, -4.25) -- (13.5,-1);
 	\draw[dotted] (8.5, -4.75) -- (13.5,-8);
-	\node() at (7.7,-4.5) {Camera};
+	\node() at (7.75,-4.5) {Camera};
 	
 	% Ponton
 	\filldraw[fill=red!20!white] (0,0) rectangle (6,-3);
@@ -227,10 +234,3 @@ degree using the winch. A schematic of the rig is shown in figure \vref{fig:rig.
 		of the rig to keep it steady and horizontal. The camera is submerged and kept in place by scaffolding approximately 1.5 meters below the surface and 2 meters from the net.}
 	\label{fig:rig.schema}
 \end{figure}
-
-
-\section{Software}
-
-\subsection{Capture Software}
-
-\subsection{Capture constraints}

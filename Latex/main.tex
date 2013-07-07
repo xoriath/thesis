@@ -55,7 +55,6 @@
 %% There must be an abstract in English, even though the main text is in Norwegian
 \selectlanguage{english}
 \include{abstract}
-\cleardoublepage
 
 %% Only for the master's thesis; if the main text is in English and you can write Norwegian, there must be an abstract in Norwegian as well.A
 \selectlanguage{norsk}
@@ -86,10 +85,10 @@
 
 %% include if relevant
 \glsaddall
-\printglossary[title=Glossary, style=long]
+\printglossary[title=Glossary and Terms, style=long]
 
 %% include if relevant
-\printglossary[title=List of Acronyms,type=\acronymtype] % prints just the list of acronyms
+\printglossary[title=List of Acronyms and Nomenclature,type=\acronymtype] % prints just the list of acronyms
 \cleardoublepage
 
 \pagenumbering{arabic}
@@ -111,14 +110,15 @@
 \include{vision}
 \cleardoublepage
 
-\include{vision_scenario}
-\cleardoublepage
 
 \include{implementation}
 \cleardoublepage{}
 
 \include{test}
 \cleardoublepage{}
+
+\include{vision_scenario}
+\cleardoublepage
 
 \include{discussion}
 \cleardoublepage{}
@@ -134,14 +134,14 @@
 \bibliography{bibliography}
 
 %% Uncomment the following if you have any appendix
- \appendix
- \addtocontents{toc}{%
-  \protect\vspace{1em}% 
-  \protect\noindent \bfseries \appendixtocname\protect\par
-  \protect\vspace{-.5em}%
- }
+% \appendix
+% \addtocontents{toc}{%
+%  \protect\vspace{1em}% 
+%  \protect\noindent \bfseries \appendixtocname\protect\par
+%  \protect\vspace{-.5em}%
+% }
 % \renewcommand{\chaptername}{\appendixname}
 %% include below possible appendices (chapters)
-\include{appendices}
+%\include{appendices}
 
 \end{document} 

@@ -1,5 +1,5 @@
 
-\chapter{Computer Vision and Algorithms}
+\chapter{Computer Vision and Algorithms}\label{chp:vision}
 
 Computer vision has seen a substantial growth over the last 40 years, as camera technology became mature 
 and the analysis of data became cheaper and faster. In this chapter we are going to look at the main algorithms 
@@ -102,7 +102,7 @@ When the whole image has been analysed, the accumulator is inspected. Lines shou
 each which would increment the accumulator leading to peaks. Each peak in the accumulator corresponds to 
 a line in the $(r, \theta)$ space, and can be extracted and recreated.
 
-\subsection{Probabilistic Hough Line Transform}
+\subsection{Probabilistic Hough Line Transform}\label{sec:hough.transform.prob}
 The \gls{phlt} is a extension to the \gls{hlt}. The extension consists of 
 some sort of probabilistic function that is applied after the accumulation has been done. This 
 function can either be a a-priori function 
@@ -152,6 +152,8 @@ Figure \vref{fig:aperture} tries to illustrate how the aperture problem arises. 
 only contains a single edge, then it is impossible to say if there are movement in any direction that is not 
 parallel to the normal direction to the edge. This means that tracing a single edge is not favourable, and all 
 modern algorithms will try to trace on corners, as a corner by definition is made of at least two non-parallel edges 
+
+\todo{Skriv om pyramider}
 
 \section{Optical flow}
 Optical flow is a term that covers the apparent motion of objects, specifically its edges and surfaces 
@@ -214,12 +216,33 @@ can then be calculated with equation \eqref{equ:phase.cross.power}.
 \end{equation}
 
 By inverse transforming $R$, we get the normalized cross-correlation, $r = \mathcal{F}^{-1}\{R\}$, which can be though of as a 
-heat map of the movement between the two frames.
+heat map of the movement between the two frames. A example of this can be seen in figure \ref{fig:phase_1}. After the inverse transform 
+there are usually some statistical estimation of the centre of the strongest peak that were detected. This ensures that the
+noise in the peak are minimized.
 
 There are however some drawbacks with using the phase correlation method, in addition to the global aspect. The global aspect 
-infers smooth and equal movement of all points between the frames. Also, since the Fourier transform is involved. The method has its base 
-in the Fourier shift theorem, which implies that the images are assumed to have a circular shift. The case is, however, that the shift 
-is more likely to be linear, and this discrepancy gives distortions in the cross-correlation.
+infers smooth and equal translation of all points between the frames. The method has its base 
+in the Fourier shift theorem, which implies that the images are assumed to have a even shift.
+
+Figure \ref{fig:phase_1} shows the spatial result of the phase correlation algorithm. The peak seen 
+gives the coordinates of the assumed translation that were detected. If multiple peaks of equal strength are 
+detected, then some other movement than linear translation is starting to become significant. A example of the 
+phase correlation during rotation can be seen in figure \ref{fig:phase_2}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{peak}
+	\caption{Image showing spatial result of phase correlation. Image collected from \citet{ee368}.}
+	\label{fig:phase_1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{phase_2}
+	\caption{Image showing spatial result of phase correlation. The multiple strong peaks implies that 
+		some rotation also took place. Image collected from \citet{ee368}.}
+	\label{fig:phase_2}
+\end{figure}
 
 \subsection{Lucas-Kanade}\label{sec:lukas-kanade}
 The Lucas-Kanade method is a widely used method for providing the needed constraints to solve \eqref{equ:optical.flow}. This method assumes that 
@@ -301,4 +324,43 @@ The full analytical steps and solution can be found in \citet{horn80} which will
 		v^{k + 1} &= \bar{v}^k - \frac{I_x\left(I_x\bar{v}^k + I_y\bar{v}^k + I_t\right)}{\alpha^2 + I_x^2 + I_y^2}
 	\end{split}
 \end{equation}
+
+\subsection{Farnebäck}\label{sec:farneback}
+The algorithm proposed by \citet{farnebackSCIA03} is a method that is quite new, but it has started to get a 
+firm foothold in the field of optical flow analysis. It has replaced the Horn-Schunck algorithm mentioned in section \ref{sec:horn-schunck} in the \gls{ocv} library.
+
+The algorithm uses quadratic polynomials to approximate the neighbourhood of each pixel. This approximation is then used to estimate the 
+displacement fields for that neighbourhood by observing the how the exact polynomial transforms during the translation. The algorithm is shown 
+to be robust and reasonably inexpensive to compute compared to the Horn-Schunck and the Lucas-Kanade algorithms. 
+
+The Farnebäck algorithm does not contain much advanced mathematics, but the theory behind it is somewhat complex. It is 
+not something that will be given in this thesis, but can be read in \citet{farnebackSCIA03}. The main idea, however,
+of the algorithm is to find the \verb|flow| so that equation \eqref{equ:farneback.update} holds.
+
+\begin{equation}\label{equ:farneback.update}
+	\text{P}_{t-1}(y,x) \sim \text{P}_t\big(y + \text{flow}_y(y,x),x+\text{flow}_x(y,x)\big)
+\end{equation}
+
+The equation in \eqref{equ:farneback.update} would have been similar to the flow constraint equation in \eqref{equ:image.constraint} if the 
+similarity in \eqref{equ:farneback.update} is replaces with a equality. This similarity constrain comes from the  quadratic 
+approximation done in \citet{farnebackSCIA03}, and shows that the mathematics of this method is quite 
+different that the other and older approaches to the optical flow problem.
+
+
+\subsection{Nyquist-Shannon sampling theorem and Optical Flow}
+The movement in this thesis is centred about movement over a repetitive and uniform surface. The edges of
+the  masks in the net gives the sampling points that the motion tracking algorithm uses. The distance which 
+these lines can move between each time the data is sampled, e.g. a frame is saved, is 
+covered by the Nyquist-Shannon sampling theorem. More on the theory behind this can be found in \citet{proakis2007}. 
+
+The part of the theorem that has impact on the repetitiveness of the object that is going to be tracked, is 
+the fact that if the sampling is happening to slowly, then the net will start to show aliasing.
+As most of the theorems are greedy, they always assume that the movement is the smallest possible. This means 
+that if a mask travels more that half of the mask height or breadth, the algorithms will fail. The 
+mask that were tracked will then be assumed to be the next mask in the opposite direction of movement. This 
+will again cause the algorithm to always be predisposed to give the wrong direction of travel if the movement is to great.
+
+The change of direction is the classic term of aliasing, and can be seen in everyday situations. Wheels on cars can for instance 
+look like they are travelling slowly backwards, when they in fact are travelling forwards. Examples of such 
+aliasing can be seen in \citet{proakis2007}.
 
